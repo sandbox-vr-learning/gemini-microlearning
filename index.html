@@ -394,16 +394,12 @@
     }
     #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-    .apollo-hero {
-      display: flex; flex-direction: column; align-items: center;
-      padding: 24px 0 20px; gap: 20px; flex: 1;
-    }
+    .apollo-row-hero { align-items: center; margin-bottom: 20px; flex: 1; }
     .apollo-img-hero {
-      width: 240px; height: 240px; object-fit: contain; flex-shrink: 0;
+      width: 140px; height: 140px; object-fit: contain; flex-shrink: 0;
     }
     .speech-bubble-hero {
-      border-radius: 14px; font-size: 15px; line-height: 1.65;
-      min-height: 100px; width: 100%; max-width: 100%;
+      font-size: 15px; line-height: 1.65;
     }
 
     audio { display: none; }
@@ -430,7 +426,7 @@
 
   <!-- â•â•â• SLIDE 1 â•â•â• -->
   <div class="slide active" id="slide-1">
-    <div class="apollo-hero">
+    <div class="apollo-row apollo-row-hero">
       <img src="assets/images/apollo.png" alt="" class="apollo-img-hero" onerror="this.style.opacity=0">
       <div class="speech-bubble speech-bubble-hero">Hi, I'm Apollo. You're going to learn two things today: how to use Gemini to build a real deck fast, and how to make sure the output has the polish that says a human made this. Your slop detector is about to get very sharp. Let's go.</div>
     </div>
