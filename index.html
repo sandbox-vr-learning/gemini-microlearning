@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Prompt it. Slop-check it. — Sandbox VR</title>
+  <title>Prompt it. Slop-check it., Sandbox VR</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
@@ -36,6 +36,7 @@
       background: var(--black);
       color: var(--white);
       font-family: var(--font);
+      font-size: 16px;
     }
 
     /* â”€â”€ Progress bar â”€â”€ */
@@ -66,10 +67,18 @@
     .slide {
       display: none;
       position: absolute; inset: 0;
-      padding: 58px 22px 72px;
+      padding: 58px 0 72px;
       overflow-y: auto; overflow-x: hidden;
       flex-direction: column;
       -ms-overflow-style: none; scrollbar-width: none;
+      align-items: center;
+    }
+    .slide > * {
+      width: 100%;
+      max-width: 820px;
+      padding-left: 28px;
+      padding-right: 28px;
+      box-sizing: border-box;
     }
     .slide::-webkit-scrollbar { display: none; }
     .slide.active {
@@ -114,12 +123,12 @@
     .apollo-row {
       display: flex; align-items: center; gap: 14px; margin-bottom: 20px;
     }
-    /* Default size — used on content-heavy slides */
+    /* Default size, used on content-heavy slides */
     .apollo-img {
       width: 90px; height: 90px; object-fit: contain; flex-shrink: 0;
     }
     .apollo-img.large { width: 120px; height: 120px; }
-    /* Hero size — slide 1 only via apollo-row-hero */
+    /* Hero size, slide 1 only via apollo-row-hero */
     .apollo-row-hero .apollo-img-hero {
       width: 140px; height: 140px; object-fit: contain; flex-shrink: 0;
     }
@@ -128,8 +137,8 @@
       background: rgba(27,36,47,0.85);
       border: 2.5px solid var(--blue);
       border-radius: 18px;
-      padding: 14px 16px;
-      font-size: 14px; line-height: 1.6;
+      padding: 16px 20px;
+      font-size: 16px; line-height: 1.6;
       color: var(--white);
       position: relative;
     }
@@ -167,7 +176,7 @@
       letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 10px;
     }
     .subheading {
-      font-size: clamp(14px, 3.8vw, 17px); font-weight: 400;
+      font-size: clamp(15px, 2vw, 18px); font-weight: 400;
       line-height: 1.6; color: rgba(255,255,255,0.65); margin-bottom: 20px;
     }
     .tag-pill {
@@ -368,7 +377,7 @@
       font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
       color: var(--yellow); margin-bottom: 6px;
     }
-    .do-now-body { font-size: 14px; line-height: 1.55; color: rgba(255,255,255,0.78); }
+    .do-now-body { font-size: 15px; line-height: 1.55; color: rgba(255,255,255,0.78); }
     .do-now-warn {
       background: rgba(255,80,80,0.07); border: 1.5px solid rgba(255,80,80,0.25);
       border-radius: 10px; padding: 10px 13px; margin-top: 8px;
@@ -415,6 +424,43 @@
       padding: 20px 22px !important; min-height: 160px;
       display: flex; align-items: center;
     }
+
+
+    /* ── Five Tells Stepper ── */
+    .tell-stepper { position: relative; }
+    .tell-step { display: none; }
+    .tell-step.active { display: block; animation: slideIn 0.3s ease both; }
+    .tell-step-counter {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+      color: var(--blue); text-transform: uppercase; margin-bottom: 10px;
+    }
+    .tell-title {
+      font-size: 18px; font-weight: 700; color: var(--white); margin-bottom: 10px;
+    }
+    .tell-example {
+      font-size: 15px; line-height: 1.55; color: rgba(255,255,255,0.55);
+      font-style: italic; background: rgba(255,255,255,0.05);
+      border-left: 3px solid rgba(255,255,255,0.2);
+      padding: 10px 14px; border-radius: 0 8px 8px 0; margin-bottom: 12px;
+    }
+    .tell-explain {
+      font-size: 15px; line-height: 1.6; color: rgba(255,255,255,0.75);
+    }
+    .tell-stepper-nav {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .tell-stepper-progress {
+      font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.4);
+    }
+    .tell-next-btn {
+      font-family: var(--font); font-size: 14px; font-weight: 700;
+      padding: 10px 22px; border-radius: 100px;
+      background: var(--blue); color: var(--white); border: none;
+      cursor: pointer; transition: background 0.2s;
+    }
+    .tell-next-btn:hover { background: #005fd4; }
+    .tell-next-btn:disabled { background: #27a75c; cursor: default; }
 
     audio { display: none; }
 
@@ -480,14 +526,18 @@
     <div class="mt16"></div>
     <div class="apollo-row">
       <img src="assets/images/apollo_with_ipad.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
-      <div class="speech-bubble">Open Gemini now. Before you do anything, make sure <strong>Gemini 2.0 Flash</strong> is selected in the model picker — it gives the best results for building decks. Follow along.</div>
+      <div class="speech-bubble">Open Gemini now. Before you do anything, make sure <strong>Gemini 2.0 Flash</strong> is selected in the model picker, it gives the best results for building decks. Follow along.</div>
     </div>
     <h2 class="heading mt8">Open Gemini</h2>
     <div class="screenshot-card mt12">
       <img src="assets/images/gemini-screenshot-1.png" alt="Gemini home screen"
            onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'>Screenshot coming soon</div>'">
     </div>
-    <a href="https://gemini.google.com" target="_blank" rel="noopener" class="cta-btn">Open Gemini</a>
+    <div class="do-now" style="margin-top:12px">
+      <div class="do-now-label">Do this now, before clicking Next</div>
+      <div class="do-now-body">Click the button below to open Gemini in a new tab. Switch your model to <strong>Gemini 2.0 Pro</strong>. Keep it open, you will use it for the rest of this training.</div>
+    </div>
+    <a href="https://gemini.google.com" target="_blank" rel="noopener" class="cta-btn" style="margin-top:12px">Open Gemini ↗</a>
   </div>
 
   <!-- â•â•â• SLIDE 4 â•â•â• -->
@@ -516,7 +566,7 @@
     <div class="mt16"></div>
     <div class="apollo-row">
       <img src="assets/images/apollo_with_ipad.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
-      <div class="speech-bubble">Do this before you type a single word. Attaching the brand file tells Gemini exactly how your slides should look — colors, fonts, layout, everything.</div>
+      <div class="speech-bubble">Do this before you type a single word. Attaching the brand file tells Gemini exactly how your slides should look, colors, fonts, layout, everything.</div>
     </div>
     <h2 class="heading mt8" style="font-size:clamp(20px,5vw,28px)">Attach your brand file first</h2>
     <div class="screenshot-card mt12">
@@ -527,12 +577,12 @@
       <li><span class="step-num">1</span>Click the "+" icon in the Gemini prompt bar</li>
       <li><span class="step-num">2</span>Select "Add from Drive"</li>
       <li><span class="step-num">3</span>Search for "SBVR Slides Made Easy"</li>
-      <li><span class="step-num">4</span>Select it — it will appear attached in the prompt bar</li>
+      <li><span class="step-num">4</span>Select it, it will appear attached in the prompt bar</li>
     </ol>
     <div class="callout">This deck was built by Chandler on the People Team. It is the official Sandbox template. Gemini will match its style when you send your prompt.</div>
     <div class="do-now">
       <div class="do-now-label">Your task right now</div>
-      <div class="do-now-body">Attach "SBVR Slides Made Easy" from Drive now. Do not send anything yet — the next slide has your prompt.</div>
+      <div class="do-now-body">Attach "SBVR Slides Made Easy" from Drive now. Do not send anything yet, the next slide has your prompt.</div>
     </div>
 </div>
 
@@ -541,7 +591,7 @@
     <div class="mt16"></div>
     <div class="apollo-row">
       <img src="assets/images/apollo_with_ipad.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
-      <div class="speech-bubble">Your turn. Switch to your Gemini tab. Fill in your actual Start, Stop, Continue goals and paste this prompt in. But do not hit send yet — we are adding one more thing first.</div>
+      <div class="speech-bubble">Your turn. Switch to your Gemini tab. Fill in your actual Start, Stop, Continue goals and paste this prompt in. But do not hit send yet, we are adding one more thing first.</div>
     </div>
     <h2 class="heading mt8" style="font-size:clamp(22px,5vw,30px)">The prompt</h2>
     <div class="mt12">
@@ -550,7 +600,7 @@
       <div class="do-now">
         <div class="do-now-label">Your task right now</div>
         <div class="do-now-body">Paste this prompt into Gemini. Replace [list your Start, Stop, Continue items] with your actual goals. Then stop.</div>
-        <div class="do-now-warn">Do not hit send yet. Next slide adds a tone instruction — Gemini needs both before you send.</div>
+        <div class="do-now-warn">Do not hit send yet. Next slide adds a tone instruction, Gemini needs both before you send.</div>
       </div>
     </div>
 </div>
@@ -560,7 +610,7 @@
     <div class="mt16"></div>
     <div class="apollo-row">
       <img src="assets/images/apollo_with_ipad.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
-      <div class="speech-bubble">Without this, Gemini writes like a consultant billing by the word. Paste this into your Gemini chat — right after your prompt. Then hit send.</div>
+      <div class="speech-bubble">Without this, Gemini writes like a consultant billing by the word. Paste this into your Gemini chat, right after your prompt. Then hit send.</div>
     </div>
     <h2 class="heading mt8">Add the tone</h2>
     <div class="mt16">
@@ -584,12 +634,12 @@
     <div class="gemini-response mt12">
       <div class="gemini-response-text">Sure! Here's an outline for your Start, Stop, Continue deck:
 
-Slide 1: Title — [Your Name], People Team
+Slide 1: Title, [Your Name], People Team
 Slide 2: Company Mission
 Slide 3: Team Mission and Vision
-Slide 4: Start — [Your Start goals]
-Slide 5: Stop — [Your Stop goals]
-Slide 6: Continue — [Your Continue goals]
+Slide 4: Start, [Your Start goals]
+Slide 5: Stop, [Your Stop goals]
+Slide 6: Continue, [Your Continue goals]
 Slide 7: Key Takeaways
 Slide 8: Thank you / Reflection</div>
     </div>
@@ -662,7 +712,7 @@ Slide 8: Thank you / Reflection</div>
     <h2 class="heading mt8" style="font-size:clamp(20px,5vw,28px)">Preview it. Then export.</h2>
     <ol class="steps mt12">
       <li><span class="step-num">1</span>After Gemini generates your deck, a slide preview panel opens in the Gemini browser window</li>
-      <li><span class="step-num">2</span>Use the arrow buttons to flip through every slide — check the content and order</li>
+      <li><span class="step-num">2</span>Use the arrow buttons to flip through every slide, check the content and order</li>
       <li><span class="step-num">3</span>When it looks right, click "Export to Slides" in the top right of the preview panel</li>
       <li><span class="step-num">4</span>Google Slides opens with your deck already built</li>
       <li><span class="step-num">5</span>Apply the SBVR Slides Made Easy theme from the Themes panel to finish</li>
@@ -697,7 +747,7 @@ Slide 8: Thank you / Reflection</div>
     <div class="mt12">
       <div class="tell-item">
         <div class="tell-title">1. Em dashes everywhere.</div>
-        <div class="tell-example">"This is important — in fact — it changes everything."</div>
+        <div class="tell-example">"This is important, in fact, it changes everything."</div>
       </div>
       <div class="tell-item">
         <div class="tell-title">2. Filler openers.</div>
@@ -713,7 +763,7 @@ Slide 8: Thank you / Reflection</div>
       </div>
       <div class="tell-item">
         <div class="tell-title">5. No voice.</div>
-        <div class="tell-example">"The goal is simple — it is not about the output, it is about the process."</div>
+        <div class="tell-example">"The goal is simple, it is not about the output, it is about the process."</div>
       </div>
     </div>
   </div>
@@ -750,39 +800,6 @@ Slide 8: Thank you / Reflection</div>
     <div class="mt16"></div>
     <div class="apollo-row">
       <img src="assets/images/apollo.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
-      <div class="speech-bubble">Three edits. That's all it takes to make this sound like a person wrote it.</div>
-    </div>
-    <h2 class="heading mt8" style="font-size:clamp(22px,5vw,28px)">The three-edit fix</h2>
-    <div class="mt12">
-      <div class="edit-card">
-        <div class="edit-card-title">1. Delete filler openers</div>
-        <div class="edit-label b">Before</div>
-        <div class="edit-before">"It is worth noting that the framework is useful."</div>
-        <div class="edit-label a" style="margin-top:7px">After</div>
-        <div class="edit-after">"This framework works."</div>
-      </div>
-      <div class="edit-card">
-        <div class="edit-card-title">2. Replace em dashes with a period or nothing</div>
-        <div class="edit-label b">Before</div>
-        <div class="edit-before">"Growth — when done right — takes time."</div>
-        <div class="edit-label a" style="margin-top:7px">After</div>
-        <div class="edit-after">"Growth takes time when done right."</div>
-      </div>
-      <div class="edit-card">
-        <div class="edit-card-title">3. Add one detail only you would know</div>
-        <div class="edit-label b">Before</div>
-        <div class="edit-before">"Our team has seen strong results."</div>
-        <div class="edit-label a" style="margin-top:7px">After</div>
-        <div class="edit-after">"Since January, our People Team has cut onboarding time by two weeks."</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- â•â•â• SLIDE 15 â•â•â• -->
-  <div class="slide" id="slide-15">
-    <div class="mt16"></div>
-    <div class="apollo-row">
-      <img src="assets/images/apollo.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
       <div class="speech-bubble">These two prompts do most of the work. Save them somewhere you will actually find them.</div>
     </div>
     <h2 class="heading mt8" style="font-size:clamp(22px,5vw,28px)">Your prompt kit</h2>
@@ -797,8 +814,8 @@ Slide 8: Thank you / Reflection</div>
     </div>
   </div>
 
-  <!-- â•â•â• SLIDE 16 â•â•â• -->
-  <div class="slide" id="slide-16">
+  <!-- â•â•â• SLIDE 15 â•â•â• -->
+  <div class="slide" id="slide-15">
     <div class="spacer"></div>
     <div class="apollo-center">
       <img src="assets/images/apollo.png" alt="" class="apollo-img large" onerror="this.style.opacity=0">
@@ -818,12 +835,12 @@ Slide 8: Thank you / Reflection</div>
 
 <div id="bottom-nav">
   <button class="nav-btn hidden" id="btn-back" onclick="prevSlide()">Back</button>
-  <span id="slide-counter">1 / 16</span>
+  <span id="slide-counter">1 / 15</span>
   <button class="nav-btn hidden" id="btn-next" onclick="nextSlide()">Next</button>
 </div>
 
 <script>
-const TOTAL = 16;
+const TOTAL = 15;
 let current = 1;
 let foundTells = new Set();
 let revealTimer = null;
@@ -955,12 +972,38 @@ initDots('car-generic');
 initDots('car-branded');
 
 // Slide 13
+const tellFeedback = {
+  '1':  "Yes! \"It is worth noting\" is peak AI filler. It adds nothing.",
+  '2':  "Em dashes! AI loves them. They do nothing. Period.",
+  '3':  "\"In today\'s world\" starts exactly zero good sentences.",
+  '4':  "A \"reminder\" nobody asked for. Cut it every time.",
+  '5':  "Three vague nouns in a bullet. Classic AI move.",
+  '6':  "This could be from any company anywhere. Zero specifics.",
+  '7':  "\"Organizational vision.\" What does that even mean here?",
+  '8':  "Big one! \"As we continue to...\" is AI\'s favorite transition.",
+  '9':  "\"Worth mentioning.\" If it\'s worth mentioning, just mention it.",
+  '10': "The \"not X, it\'s Y\" construction. AI uses this constantly.",
+  '11': "The king of filler. At the end of the day, don\'t use this.",
+  '12': "\"The goal is not to...\" Another AI signature move.",
+  '13': "Which results? Which initiatives? This says nothing.",
+  '14': "\"In conclusion\" is how AI says it\'s wrapping up. Just stop."
+};
+
+function showTellToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => { t.classList.remove('show'); t.textContent = 'Copied!'; }, 2800);
+}
+
 document.querySelectorAll('.tappable').forEach(span => {
   span.addEventListener('click', () => {
     if (span.classList.contains('found')) return;
     span.classList.add('found');
     foundTells.add(span.dataset.tell);
     document.getElementById('found-count').textContent = foundTells.size;
+    const msg = tellFeedback[span.dataset.tell] || 'Got it!';
+    showTellToast(msg);
     if (foundTells.size === TELL_COUNT) onAllFound();
   });
 });
@@ -1013,6 +1056,24 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') prevSlide();
 });
 
+
+// Five Tells Stepper
+let currentTell = 1;
+const TOTAL_TELLS = 5;
+function nextTell() {
+  if (currentTell >= TOTAL_TELLS) return;
+  document.querySelector('.tell-step[data-step="' + currentTell + '"]').classList.remove('active');
+  currentTell++;
+  document.querySelector('.tell-step[data-step="' + currentTell + '"]').classList.add('active');
+  document.getElementById('tell-progress-text').textContent = currentTell + ' of ' + TOTAL_TELLS;
+  if (currentTell === TOTAL_TELLS) {
+    const btn = document.getElementById('tell-next-btn');
+    btn.textContent = 'All 5 spotted ✓';
+    btn.disabled = true;
+  }
+}
+
+updateTell = () => {}; // placeholder
 updateUI();
 </script>
 </body>
