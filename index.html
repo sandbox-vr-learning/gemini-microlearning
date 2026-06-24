@@ -64,24 +64,29 @@
     }
 
     .slide {
+      display: none;
       position: absolute; inset: 0;
       padding: 58px 22px 72px;
       overflow-y: auto; overflow-x: hidden;
-      display: flex; flex-direction: column;
-      opacity: 0; pointer-events: none; visibility: hidden;
-      transition: opacity 0.28s ease, transform 0.28s ease, visibility 0s linear 0.28s;
-      transform: translateX(32px);
+      flex-direction: column;
       -ms-overflow-style: none; scrollbar-width: none;
     }
     .slide::-webkit-scrollbar { display: none; }
     .slide.active {
-      opacity: 1; pointer-events: all; visibility: visible;
-      transform: translateX(0);
-      transition: opacity 0.28s ease, transform 0.28s ease, visibility 0s linear 0s;
+      display: flex;
+      animation: slideIn 0.28s ease both;
     }
-    .slide.exit-left {
-      opacity: 0; transform: translateX(-32px); visibility: hidden;
-      transition: opacity 0.28s ease, transform 0.28s ease, visibility 0s linear 0.28s;
+    .slide.going-back.active {
+      animation: slideInBack 0.28s ease both;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(24px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes slideInBack {
+      from { opacity: 0; transform: translateX(-24px); }
+      to   { opacity: 1; transform: translateX(0); }
     }
 
     /* ── Bottom nav ── */
@@ -114,11 +119,32 @@
     }
     .apollo-img.large { width: 96px; height: 96px; }
     .speech-bubble {
-      flex: 1; background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.11);
+      flex: 1; background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,0.14);
       border-radius: 14px 14px 14px 4px;
-      padding: 11px 14px; font-size: 14px; line-height: 1.55;
-      color: rgba(255,255,255,0.82);
+      padding: 12px 14px; font-size: 14px; line-height: 1.55;
+      color: rgba(255,255,255,0.88);
+      position: relative;
+    }
+    .speech-bubble::before {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: -9px;
+      width: 0; height: 0;
+      border-style: solid;
+      border-width: 0 0 10px 10px;
+      border-color: transparent transparent rgba(255,255,255,0.14) transparent;
+    }
+    .speech-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: 1px;
+      left: -7px;
+      width: 0; height: 0;
+      border-style: solid;
+      border-width: 0 0 9px 9px;
+      border-color: transparent transparent rgba(255,255,255,0.09) transparent;
     }
     .apollo-center {
       display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 20px;
@@ -731,25 +757,12 @@ function goToSlide(n) {
   const next = document.getElementById('slide-' + n);
   const fwd = n > current;
 
-  // Prime next slide's starting position before making it visible
-  next.style.transition = 'none';
-  next.style.transform = fwd ? 'translateX(32px)' : 'translateX(-32px)';
-
-  requestAnimationFrame(() => {
-    // Now animate both slides
-    next.style.transition = '';
-    next.classList.add('active');
-    prev.classList.remove('active');
-    if (fwd) prev.classList.add('exit-left');
-
-    setTimeout(() => {
-      prev.classList.remove('exit-left');
-      next.style.transform = '';
-    }, 320);
-  });
+  prev.classList.remove('active', 'going-back');
+  next.classList.toggle('going-back', !fwd);
+  next.classList.add('active');
+  next.scrollTop = 0;
 
   current = n;
-  next.scrollTop = 0;
   updateUI();
   playAudio(n);
 
@@ -774,13 +787,18 @@ function updateUI() {
   current === 1 ? back.classList.add('hidden') : back.classList.remove('hidden');
 
   const next = document.getElementById('btn-next');
-  if (current === 13 && foundTells.size < 8) {
+  if (current === 1) {
+    next.classList.add('hidden');
+  } else if (current === 13 && foundTells.size < 8) {
+    next.classList.remove('hidden');
     next.disabled = true;
     next.textContent = 'Keep going';
   } else if (current === TOTAL) {
+    next.classList.remove('hidden');
     next.disabled = true;
     next.textContent = 'Done';
   } else {
+    next.classList.remove('hidden');
     next.disabled = false;
     next.textContent = 'Next';
   }
