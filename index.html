@@ -2,10 +2,888 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Build fast. Look sharp. — Sandbox VR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    @font-face {
+      font-family: 'Proxima Nova';
+      src: url('/assets/fonts/ProximaNova-Regular.woff2') format('woff2');
+      font-weight: 400;
+    }
+    @font-face {
+      font-family: 'Proxima Nova';
+      src: url('/assets/fonts/ProximaNova-Bold.woff2') format('woff2');
+      font-weight: 700;
+    }
+
+    :root {
+      --blue: #0076FF;
+      --black: #1B242F;
+      --grey: #EFF3F7;
+      --white: #ffffff;
+      --yellow: #FFD166;
+      --font: 'Proxima Nova', 'Nunito', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font);
+    }
+
+    /* ── Progress bar ── */
+    #progress-bar {
+      position: fixed; top: 0; left: 0; right: 0; height: 4px;
+      background: rgba(255,255,255,0.12); z-index: 200;
+    }
+    #progress-fill {
+      height: 100%; background: var(--blue);
+      transition: width 0.35s ease; width: 6.25%;
+    }
+
+    /* ── Logo ── */
+    #logo {
+      position: fixed; top: 14px; left: 16px; z-index: 200; height: 26px;
+    }
+    #logo img { height: 100%; width: auto; display: block; }
+    #logo .logo-text {
+      display: none; height: 26px; align-items: center;
+      font-weight: 700; font-size: 13px; letter-spacing: 0.06em; color: var(--white);
+    }
+
+    /* ── Slides ── */
+    #slides-container {
+      position: fixed; inset: 0; overflow: hidden;
+    }
+
+    .slide {
+      position: absolute; inset: 0;
+      padding: 58px 22px 72px;
+      overflow-y: auto; overflow-x: hidden;
+      display: flex; flex-direction: column;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.28s ease, transform 0.28s ease;
+      transform: translateX(32px);
+      -ms-overflow-style: none; scrollbar-width: none;
+    }
+    .slide::-webkit-scrollbar { display: none; }
+    .slide.active { opacity: 1; pointer-events: all; transform: translateX(0); }
+    .slide.exit-left { opacity: 0; transform: translateX(-32px); transition: opacity 0.28s ease, transform 0.28s ease; }
+
+    /* ── Bottom nav ── */
+    #bottom-nav {
+      position: fixed; bottom: 0; left: 0; right: 0; height: 60px;
+      background: rgba(27,36,47,0.96); backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(255,255,255,0.07);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 18px; z-index: 200;
+    }
+    .nav-btn {
+      font-family: var(--font); font-size: 14px; font-weight: 700;
+      padding: 8px 22px; border-radius: 100px; cursor: pointer;
+      transition: all 0.2s; min-width: 80px; text-align: center;
+      border: 1.5px solid rgba(255,255,255,0.22); background: none; color: var(--white);
+    }
+    .nav-btn:hover:not(:disabled) { border-color: rgba(255,255,255,0.5); }
+    .nav-btn.hidden { visibility: hidden; pointer-events: none; }
+    #btn-next { background: var(--blue); border-color: var(--blue); }
+    #btn-next:hover:not(:disabled) { background: #005fd4; border-color: #005fd4; }
+    #btn-next:disabled { background: rgba(0,118,255,0.35); border-color: transparent; opacity: 1; cursor: not-allowed; }
+    #slide-counter { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.45); letter-spacing: 0.05em; }
+
+    /* ── Apollo ── */
+    .apollo-row {
+      display: flex; align-items: flex-end; gap: 10px; margin-bottom: 20px;
+    }
+    .apollo-img {
+      width: 60px; height: 60px; object-fit: contain; flex-shrink: 0;
+    }
+    .apollo-img.large { width: 96px; height: 96px; }
+    .speech-bubble {
+      flex: 1; background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.11);
+      border-radius: 14px 14px 14px 4px;
+      padding: 11px 14px; font-size: 14px; line-height: 1.55;
+      color: rgba(255,255,255,0.82);
+    }
+    .apollo-center {
+      display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 20px;
+    }
+    .apollo-center .apollo-img { margin-bottom: 14px; }
+    .apollo-center .speech-bubble { border-radius: 14px; max-width: 300px; text-align: left; }
+
+    /* ── Type ── */
+    .heading {
+      font-size: clamp(26px, 6.5vw, 40px); font-weight: 700;
+      letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 10px;
+    }
+    .subheading {
+      font-size: clamp(14px, 3.8vw, 17px); font-weight: 400;
+      line-height: 1.6; color: rgba(255,255,255,0.65); margin-bottom: 20px;
+    }
+    .tag-pill {
+      display: inline-block; background: rgba(0,118,255,0.18);
+      border: 1px solid rgba(0,118,255,0.35); color: #70b5ff;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.04em;
+      padding: 4px 12px; border-radius: 100px; margin-right: 6px; margin-bottom: 18px;
+    }
+
+    /* ── Buttons ── */
+    .cta-btn {
+      display: flex; align-items: center; justify-content: center;
+      width: 100%; padding: 14px; border-radius: 100px;
+      background: var(--blue); color: var(--white); border: none;
+      font-family: var(--font); font-size: 16px; font-weight: 700;
+      cursor: pointer; text-decoration: none; transition: background 0.2s;
+      margin-top: 6px;
+    }
+    .cta-btn:hover { background: #005fd4; }
+    .copy-btn {
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      width: 100%; padding: 12px; border-radius: 100px;
+      background: var(--blue); color: var(--white); border: none;
+      font-family: var(--font); font-size: 14px; font-weight: 700;
+      cursor: pointer; margin-bottom: 14px; transition: background 0.2s;
+    }
+    .copy-btn:hover { background: #005fd4; }
+    .copy-btn.copied { background: #27a75c; }
+
+    /* ── Cards ── */
+    .card {
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 14px; padding: 16px; margin-bottom: 12px;
+    }
+    .card-red { background: rgba(255,70,70,0.07); border-color: rgba(255,70,70,0.2); }
+    .card-green { background: rgba(0,195,95,0.07); border-color: rgba(0,195,95,0.2); }
+    .card-blue { background: rgba(0,118,255,0.07); border-color: rgba(0,118,255,0.2); }
+    .card-label { font-size: 11px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; margin-bottom: 6px; color: rgba(255,255,255,0.45); }
+    .card-label.red { color: #ff7070; }
+    .card-label.green { color: #4ecb8d; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+
+    /* ── Prompt block ── */
+    .prompt-block {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px; padding: 14px; font-size: 13px; line-height: 1.65;
+      color: rgba(255,255,255,0.78); margin-bottom: 10px;
+      white-space: pre-wrap; word-break: break-word;
+    }
+    .block-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase;
+      color: rgba(255,255,255,0.38); margin-bottom: 5px;
+    }
+
+    /* ── Mock Gemini ── */
+    .gemini-mock {
+      background: #1e1e2e; border-radius: 14px; padding: 14px;
+      cursor: pointer; margin-bottom: 14px; position: relative;
+    }
+    .gemini-mock-text {
+      font-size: 13px; line-height: 1.6; color: rgba(255,255,255,0.65);
+      padding-bottom: 36px; white-space: pre-wrap; word-break: break-word;
+    }
+    .gemini-mock-bar {
+      position: absolute; bottom: 10px; left: 14px; right: 14px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .g-plus {
+      width: 26px; height: 26px; border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.28);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 17px; color: rgba(255,255,255,0.55); line-height: 1;
+    }
+    .g-right { display: flex; align-items: center; gap: 7px; }
+    .g-pro {
+      font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.45);
+      border: 1px solid rgba(255,255,255,0.18); padding: 2px 7px; border-radius: 100px;
+    }
+    .g-send {
+      width: 30px; height: 30px; background: var(--blue); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ── Gemini response ── */
+    .gemini-response {
+      background: #1e1e2e; border-radius: 14px; padding: 14px; margin-bottom: 12px;
+    }
+    .gemini-response-text { font-size: 13px; line-height: 1.8; color: rgba(255,255,255,0.78); white-space: pre-wrap; }
+
+    /* ── Chips ── */
+    .chips { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 14px; }
+    .chip {
+      background: rgba(255,209,102,0.1); border: 1px solid rgba(255,209,102,0.28);
+      color: var(--yellow); font-size: 12px; font-weight: 600;
+      padding: 5px 11px; border-radius: 100px;
+    }
+
+    /* ── Screenshot ── */
+    .screenshot-card {
+      width: 100%; border-radius: 14px; overflow: hidden;
+      background: rgba(255,255,255,0.04); margin-bottom: 14px;
+    }
+    .screenshot-card img { width: 100%; height: auto; display: block; }
+    .img-placeholder {
+      height: 160px; display: flex; align-items: center; justify-content: center;
+      font-size: 13px; color: rgba(255,255,255,0.28);
+    }
+
+    /* ── Steps ── */
+    .steps { list-style: none; margin-bottom: 18px; }
+    .steps li { display: flex; align-items: flex-start; gap: 11px; margin-bottom: 13px; font-size: 15px; line-height: 1.5; color: rgba(255,255,255,0.82); }
+    .step-num {
+      width: 22px; height: 22px; background: var(--blue); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; flex-shrink: 0; margin-top: 2px;
+    }
+
+    /* ── Callout ── */
+    .callout {
+      background: rgba(0,118,255,0.07); border: 1px solid rgba(0,118,255,0.2);
+      border-radius: 12px; padding: 13px 15px; font-size: 14px; line-height: 1.6;
+      color: rgba(255,255,255,0.78); margin-bottom: 14px;
+    }
+
+    /* ── Carousel ── */
+    .carousels-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+    .carousel { position: relative; }
+    .carousel-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+      color: rgba(255,255,255,0.42); margin-bottom: 6px; text-align: center;
+    }
+    .carousel-track {
+      position: relative; border-radius: 10px; overflow: hidden;
+      background: rgba(255,255,255,0.05); aspect-ratio: 16/9;
+    }
+    .c-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.22s; }
+    .c-slide.active { opacity: 1; }
+    .c-slide img { width: 100%; height: 100%; object-fit: cover; }
+    .c-placeholder {
+      width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+      font-size: 11px; color: rgba(255,255,255,0.28); text-align: center; padding: 6px;
+    }
+    .c-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(0,0,0,0.5); border: none; color: white;
+      width: 22px; height: 22px; border-radius: 50%; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; font-size: 13px; z-index: 2;
+    }
+    .c-arrow.left { left: 3px; }
+    .c-arrow.right { right: 3px; }
+
+    /* ── Section label ── */
+    .section-label {
+      display: inline-block; background: rgba(255,209,102,0.1);
+      border: 1px solid rgba(255,209,102,0.28); color: var(--yellow);
+      font-size: 12px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+      padding: 5px 13px; border-radius: 100px; margin-bottom: 10px;
+    }
+
+    /* ── Five tells ── */
+    .tell-item { margin-bottom: 12px; padding: 13px 14px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; }
+    .tell-title { font-weight: 700; font-size: 15px; margin-bottom: 5px; }
+    .tell-example { font-size: 13px; font-style: italic; color: rgba(255,255,255,0.4); font-family: monospace; line-height: 1.5; }
+
+    /* ── Slide 13 ── */
+    .para-card {
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px; padding: 18px; font-size: 15px; line-height: 1.85;
+      color: rgba(255,255,255,0.82); margin-bottom: 12px;
+      transition: box-shadow 0.4s ease;
+    }
+    .para-card.all-found { box-shadow: 0 0 0 2px #4ecb8d, 0 0 28px rgba(78,203,141,0.18); }
+    .para-card p + p { margin-top: 14px; }
+    .tappable { cursor: pointer; border-radius: 3px; padding: 0 2px; transition: background 0.15s, color 0.15s; }
+    .tappable.found { background: var(--yellow); color: var(--black); }
+    .found-counter { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.55); margin-bottom: 10px; text-align: center; }
+    #reveal-btn {
+      display: none; width: 100%;
+      background: transparent; border: 1.5px solid rgba(255,209,102,0.38);
+      color: var(--yellow); font-family: var(--font); font-size: 14px; font-weight: 600;
+      padding: 10px; border-radius: 100px; cursor: pointer; margin-bottom: 12px;
+    }
+
+    /* ── Slide 14 edit cards ── */
+    .edit-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 13px; padding: 15px; margin-bottom: 12px; }
+    .edit-card-title { font-size: 12px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 9px; }
+    .edit-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 3px; }
+    .edit-label.b { color: rgba(255,110,110,0.7); }
+    .edit-label.a { color: rgba(80,210,140,0.7); }
+    .edit-before { background: rgba(255,70,70,0.07); border: 1px solid rgba(255,70,70,0.14); border-radius: 8px; padding: 9px 11px; font-size: 13px; line-height: 1.5; color: rgba(255,120,120,0.88); margin-bottom: 7px; }
+    .edit-after { background: rgba(0,195,95,0.07); border: 1px solid rgba(0,195,95,0.14); border-radius: 8px; padding: 9px 11px; font-size: 13px; line-height: 1.5; color: rgba(80,215,145,0.88); }
+
+    /* ── Slide 16 takeaways ── */
+    .takeaway { font-size: clamp(15px, 3.8vw, 18px); line-height: 1.6; color: rgba(255,255,255,0.82); padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .takeaway:last-child { border-bottom: none; }
+
+    /* ── Divider ── */
+    .divider { height: 1px; background: rgba(255,255,255,0.08); margin: 14px 0; }
+
+    /* ── Small caption ── */
+    .caption { font-size: 12px; color: rgba(255,255,255,0.38); text-align: center; margin-top: -6px; margin-bottom: 14px; }
+
+    /* ── Toast ── */
+    #toast {
+      position: fixed; bottom: 72px; left: 50%; transform: translateX(-50%) translateY(16px);
+      background: #27a75c; color: white; font-family: var(--font); font-size: 14px; font-weight: 600;
+      padding: 9px 22px; border-radius: 100px; opacity: 0;
+      transition: all 0.22s ease; z-index: 300; white-space: nowrap; pointer-events: none;
+    }
+    #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    audio { display: none; }
+
+    .spacer { flex: 1; }
+    .mt8 { margin-top: 8px; }
+    .mt12 { margin-top: 12px; }
+    .mt16 { margin-top: 16px; }
+  </style>
 </head>
 <body>
-  <p>Coming soon.</p>
+
+<div id="progress-bar"><div id="progress-fill"></div></div>
+
+<div id="logo">
+  <img src="/assets/images/logo.png" alt="Sandbox VR"
+       onerror="this.style.display='none';document.querySelector('#logo .logo-text').style.display='flex'">
+  <div class="logo-text">SANDBOX VR</div>
+</div>
+
+<div id="toast">Copied!</div>
+
+<div id="slides-container">
+
+  <!-- ═══ SLIDE 1 ═══ -->
+  <div class="slide active" id="slide-1">
+    <div class="mt16"></div>
+    <div class="apollo-row">
+      <img src="/assets/images/apollo.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
+      <div class="speech-bubble">Hi, I'm Apollo. In the next 10 minutes you're going to learn how to use Gemini to build a deck, and then make sure it doesn't look like a robot built it. Let's go.</div>
+    </div>
+    <div class="spacer"></div>
+    <h1 class="heading">Build fast.<br>Look sharp.</h1>
+    <p class="subheading">Learn how to use Gemini to build a deck in minutes. Then make sure nobody can tell a robot touched it.</p>
+    <div>
+      <span class="tag-pill">Gemini for Slides</span>
+      <span class="tag-pill">AI Discernment</span>
+    </div>
+    <button class="cta-btn" onclick="goToSlide(2)">Let's go</button>
+  </div>
+
+  <!-- ═══ SLIDE 2 ═══ -->
+  <div class="slide" id="slide-2">
+    <div class="mt16"></div>
+    <div class="apollo-row">
+      <img src="/assets/images/apollo.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
+      <div class="speech-bubble">Two parts. First: use Gemini to actually build something useful. Second: fix the stuff that makes it obvious you used Gemini. Both matter.</div>
+    </div>
+    <h2 class="heading mt12">What we're doing today</h2>
+    <div class="two-col mt16">
+      <div class="card" style="text-align:center">
+        <div style="font-size:26px;font-weight:800;color:var(--blue);margin-bottom:6px">01</div>
+        <div style="font-weight:700;font-size:15px;margin-bottom:4px">Build it</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.45);line-height:1.4">Use Gemini to create a real deck</div>
+      </div>
+      <div class="card" style="text-align:center">
+        <div style="font-size:26px;font-weight:800;color:var(--yellow);margin-bottom:6px">02</div>
+        <div style="font-weight:700;font-size:15px;margin-bottom:4px">Fix it</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.45);line-height:1.4">Remove the tells so it sounds like you</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SLIDE 3 ═══ -->
+  <div class="slide" id="slide-3">
+    <div class="mt16"></div>
+    <div class="apollo-row">
+      <img src="/assets/images/apollo.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
+      <div class="speech-bubble">Open Gemini now. Follow along. This works a lot better if you're actually doing it.</div>
+    </div>
+    <h2 class="heading mt8">Open Gemini</h2>
+    <div class="screenshot-card mt12">
+      <img src="/assets/images/gemini-screenshot-1.png" alt="Gemini home screen"
+           onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'>Screenshot coming soon</div>'">
+    </div>
+    <a href="https://gemini.google.com" target="_blank" rel="noopener" class="cta-btn">Open Gemini</a>
+  </div>
+
+  <!-- ═══ SLIDE 4 ═══ -->
+  <div class="slide" id="slide-4">
+    <div class="mt16"></div>
+    <div class="apollo-row">
+      <img src="/assets/images/apollo.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
+      <div class="speech-bubble">If you type "make me a presentation about my goals" into Gemini, you will get a presentation about your goals. It will be bad. Here's why, and how to fix it before you even start.</div>
+    </div>
+    <h2 class="heading mt8" style="font-size:clamp(22px,5.5vw,32px)">Don't just say "make me slides"</h2>
+    <div class="two-col mt12">
+      <div class="card card-red">
+        <div class="card-label red">This</div>
+        <div style="font-size:13px;line-height:1.5;color:rgba(255,255,255,0.72)">"Make me a presentation about my Start, Stop, Continue goals."</div>
+      </div>
+      <div class="card card-green">
+        <div class="card-label green">This instead</div>
+        <div style="font-size:13px;line-height:1.5;color:rgba(255,255,255,0.72)">"I need a 10-slide deck for the People Team about my Start, Stop, Continue goals. Key points: [list them]. Write an outline first. Tone: direct, conversational, no jargon."</div>
+      </div>
+    </div>
+    <p class="caption">Same request. Completely different output.</p>
+  </div>
+
+  <!-- ═══ SLIDE 5 ═══ -->
+  <div class="slide" id="slide-5">
+    <div class="mt16"></div>
+    <div class="apollo-row">
+      <img src="/assets/images/apollo.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
+      <div class="speech-bubble">Your turn. You're building a Start, Stop, Continue deck for the People Team. Here's the prompt. Fill in your own goals and copy it straight to Gemini.</div>
+    </div>
+    <h2 class="heading mt8" style="font-size:clamp(22px,5vw,30px)">The prompt</h2>
+    <div class="mt12">
+      <div class="prompt-block" id="p5">I need a 10-slide deck for the People Team about my personal Start, Stop, and Continue goals. Key points: [list your Start, Stop, Continue items]. Write an outline first. Tone: direct, conversational, no jargon, short sentences. Make sure there is a title slide. The second and third slides should display in big text: our company mission: 'To bring people closer together through world class immersive experiences.' And our team mission and vision: People Team Mission: 'Building the Organization and its Culture Through our People.' People Team Vision: 'Fun and Frictionless.'</div>
+      <button class="copy-btn" id="copy5" onclick="copyText('p5','copy5')">Copy to Gemini</button>
+      <div class="gemini-mock" onclick="window.open('https://gemini.google.com','_blank')">
+        <div class="gemini-mock-text">I need a 10-slide deck for the People Team about my personal Start, Stop, and Continue goals. Key points: [list your Start, Stop, Continue items]. Write an outline first. Tone: direct, conversational, no jargon, short sentences...</div>
+        <div class="gemini-mock-bar">
+          <div class="g-plus">+</div>
+          <div class="g-right">
+            <div class="g-pro">Pro</div>
+            <div class="g-send">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 2L11 13" stroke="white" stroke-width="2.2" stroke-linecap="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SLIDE 6 ═══ -->
+  <div class="slide" id="slide-6">
+    <div class="mt16"></div>
+    <div class="apollo-row">
+      <img src="/assets/images/apollo.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
+      <div class="speech-bubble">Before Gemini writes 10 slides you don't want, ask for the outline. Read it. Fix what's wrong. Then tell it to build. This one habit saves you 20 minutes of cleanup.</div>
+    </div>
+    <h2 class="heading mt8" style="font-size:clamp(20px,5vw,28px)">Ask for the outline first</h2>
+    <div class="gemini-response mt12">
+      <div class="gemini-response-text">Sure! Here's an outline for your Start, Stop, Continue deck:
+
+Slide 1: Title — [Your Name], People Team
+Slide 2: Company Mission
+Slide 3: Team Mission and Vision
+Slide 4: Start — [Your Start goals]
+Slide 5: Start continued
+Slide 6: Stop — [Your Stop goals]
+Slide 7: Stop continued
+Slide 8: Continue — [Your Continue goals]
+Slide 9: Continue continued
+Slide 10: Thank you / Reflection</div>
+    </div>
+    <div class="chips">
+      <span class="chip">Cut the 'continued' slides — combine them</span>
+      <span class="chip">Add your name to slide 1</span>
+      <span class="chip">Reorder if needed</span>
+    </div>
+  </div>
+
+  <!-- ═══ SLIDE 7 ═══ -->
+  <div class="slide" id="slide-7">
+    <div class="mt16"></div>
+    <div class="apollo-row">
+      <img src="/assets/images/apollo.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
+      <div class="speech-bubble">Without this, Gemini writes like a consultant who's billing by the word. Copy this. Paste it into every session.</div>
+    </div>
+    <h2 class="heading mt8">Give it a tone</h2>
+    <div class="mt16">
+      <div class="prompt-block" id="p7">Write in a direct, conversational tone. No jargon. Short sentences. Do not use: em dashes, 'it is worth noting,' 'in conclusion,' 'leverage,' 'the goal is simple,' 'it is not X it is Y,' 'at the end of the day,' 'it is worth mentioning,' 'in today's world,' 'this is a reminder that,' or 'as we continue to.' If you catch yourself writing any of these, delete the sentence and start over.</div>
+      <button class="copy-btn" id="copy7" onclick="copyText('p7','copy7')">Copy</button>
+    </div>
+  </div>
+
+  <!-- ═══ SLIDE 8 ═══ -->
+  <div class="slide" id="slide-8">
+    <div class="mt16"></div>
+    <div class="apollo-row">
+      <img src="/assets/images/apollo.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
+      <div class="speech-bubble">Gemini can pull files straight from your Google Drive. Here's how.</div>
+    </div>
+    <h2 class="heading mt8" style="font-size:clamp(20px,5vw,28px)">Attach from Google Drive</h2>
+    <div class="screenshot-card mt12">
+      <img src="/assets/images/gemini-screenshot-2.png" alt="Gemini with Drive file attached"
+           onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'>Screenshot coming soon</div>'">
+    </div>
+    <ol class="steps">
+      <li><span class="step-num">1</span>Click the "+" icon in the Gemini prompt bar</li>
+      <li><span class="step-num">2</span>Select "Add from Drive"</li>
+      <li><span class="step-num">3</span>Search for "SBVR Slides Made Easy"</li>
+      <li><span class="step-num">4</span>Select it and attach before you send</li>
+    </ol>
+    <div class="callout">This deck was built by Chandler on the People Team. It is the official Sandbox template. Attaching it tells Gemini exactly how your slides should look.</div>
+  </div>
+
+  <!-- ═══ SLIDE 9 ═══ -->
+  <div class="slide" id="slide-9">
+    <div class="mt16"></div>
+    <div class="apollo-row">
+      <img src="/assets/images/apollo.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
+      <div class="speech-bubble">Here's what happens when you attach the brand file. Same prompt. Two very different results.</div>
+    </div>
+    <h2 class="heading mt8">Generic vs Branded</h2>
+    <div class="carousels-row mt12">
+      <div class="carousel" id="car-generic">
+        <div class="carousel-label">No brand file</div>
+        <div class="carousel-track">
+          <div class="c-slide active"><img src="/assets/images/slides-generic/slide-1.png" alt="" onerror="this.parentElement.innerHTML='<div class=\'c-placeholder\'>Preview coming soon</div>'"></div>
+          <div class="c-slide"><img src="/assets/images/slides-generic/slide-2.png" alt="" onerror="this.parentElement.innerHTML='<div class=\'c-placeholder\'>Preview coming soon</div>'"></div>
+          <div class="c-slide"><img src="/assets/images/slides-generic/slide-3.png" alt="" onerror="this.parentElement.innerHTML='<div class=\'c-placeholder\'>Preview coming soon</div>'"></div>
+        </div>
+        <button class="c-arrow left" onclick="cPrev('car-generic')">&#8249;</button>
+        <button class="c-arrow right" onclick="cNext('car-generic')">&#8250;</button>
+      </div>
+      <div class="carousel" id="car-branded">
+        <div class="carousel-label">With SBVR template</div>
+        <div class="carousel-track">
+          <div class="c-slide active"><img src="/assets/images/slides-branded/slide-1.png" alt="" onerror="this.parentElement.innerHTML='<div class=\'c-placeholder\'>Preview coming soon</div>'"></div>
+          <div class="c-slide"><img src="/assets/images/slides-branded/slide-2.png" alt="" onerror="this.parentElement.innerHTML='<div class=\'c-placeholder\'>Preview coming soon</div>'"></div>
+          <div class="c-slide"><img src="/assets/images/slides-branded/slide-3.png" alt="" onerror="this.parentElement.innerHTML='<div class=\'c-placeholder\'>Preview coming soon</div>'"></div>
+        </div>
+        <button class="c-arrow left" onclick="cPrev('car-branded')">&#8249;</button>
+        <button class="c-arrow right" onclick="cNext('car-branded')">&#8250;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SLIDE 10 ═══ -->
+  <div class="slide" id="slide-10">
+    <div class="mt16"></div>
+    <div class="apollo-row">
+      <img src="/assets/images/apollo.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
+      <div class="speech-bubble">Now take your outline into Slides and let Gemini finish the job. Here's exactly how.</div>
+    </div>
+    <h2 class="heading mt8" style="font-size:clamp(20px,5vw,28px)">Take it into Google Slides</h2>
+    <ol class="steps mt12">
+      <li><span class="step-num">1</span>Open Google Slides and start a new presentation</li>
+      <li><span class="step-num">2</span>Click the Gemini star icon in the top right toolbar</li>
+      <li><span class="step-num">3</span>Paste your refined outline into the Gemini panel</li>
+      <li><span class="step-num">4</span>Ask it to build the slides using your outline</li>
+      <li><span class="step-num">5</span>Apply the SBVR Slides Made Easy theme after</li>
+    </ol>
+    <a href="https://slides.google.com" target="_blank" rel="noopener" class="cta-btn">Open Google Slides</a>
+  </div>
+
+  <!-- ═══ SLIDE 11 ═══ -->
+  <div class="slide" id="slide-11">
+    <div class="spacer"></div>
+    <div class="apollo-center">
+      <img src="/assets/images/apollo.png" alt="" class="apollo-img large" onerror="this.style.opacity=0">
+      <div class="speech-bubble">Okay. You have got a draft. Now the problem: it reads like AI wrote it. Because AI wrote it. Here's how to fix that before anyone notices.</div>
+    </div>
+    <div style="text-align:center;margin-top:8px">
+      <span class="section-label">Part 2: Make it not look like AI</span>
+    </div>
+    <div class="spacer"></div>
+  </div>
+
+  <!-- ═══ SLIDE 12 ═══ -->
+  <div class="slide" id="slide-12">
+    <div class="mt16"></div>
+    <div class="apollo-row">
+      <img src="/assets/images/apollo.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
+      <div class="speech-bubble">AI writing has patterns. Once you see them you cannot unsee them. These are the five things that give it away every time.</div>
+    </div>
+    <h2 class="heading mt8" style="font-size:clamp(22px,5vw,28px)">The five tells</h2>
+    <div class="mt12">
+      <div class="tell-item">
+        <div class="tell-title">1. Em dashes everywhere.</div>
+        <div class="tell-example">"This is important — and here is why — it changes everything."</div>
+      </div>
+      <div class="tell-item">
+        <div class="tell-title">2. Filler openers.</div>
+        <div class="tell-example">"It is worth noting that our team has made significant progress."</div>
+      </div>
+      <div class="tell-item">
+        <div class="tell-title">3. Everything in exactly three points. Always.</div>
+        <div class="tell-example">"There are three key areas: alignment, communication, and growth."</div>
+      </div>
+      <div class="tell-item">
+        <div class="tell-title">4. No specific details.</div>
+        <div class="tell-example">"Our team has seen strong results across multiple initiatives this quarter."</div>
+      </div>
+      <div class="tell-item">
+        <div class="tell-title">5. No voice.</div>
+        <div class="tell-example">"The goal is simple — it is not about the output, it is about the process."</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SLIDE 13 ═══ -->
+  <div class="slide" id="slide-13">
+    <div class="mt16"></div>
+    <div class="apollo-row">
+      <img src="/assets/images/apollo.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
+      <div class="speech-bubble" id="bubble13">This was written by Gemini. Tap every phrase that gives it away. All of them. You cannot move on until you find them all.</div>
+    </div>
+    <p class="found-counter"><span id="found-count">0</span> of 8 found.</p>
+    <div class="para-card" id="tell-card">
+      <p><span class="tappable" data-tell="1">It is worth noting</span> that the Start, Stop, Continue framework<span class="tappable" data-tell="2"> — when applied thoughtfully — </span>represents a significant opportunity for personal and professional growth. <span class="tappable" data-tell="3">There are three key areas: clarity, accountability, and reflection.</span> <span class="tappable" data-tell="4">At the end of the day,</span> the goal is not simply to list actions, but to demonstrate a commitment to continuous improvement.</p>
+      <p><span class="tappable" data-tell="5">As we continue to</span> evolve as a team, <span class="tappable" data-tell="6">it is worth mentioning</span> that this exercise serves as a reminder that growth is not linear. <span class="tappable" data-tell="7">The goal is simple</span> — <span class="tappable" data-tell="8">it is not about perfection, it is about progress.</span> Our people have shown strong results across a number of initiatives, and this deck is an opportunity to celebrate that momentum going forward.</p>
+    </div>
+    <button id="reveal-btn" onclick="revealAll()">Show me the rest</button>
+  </div>
+
+  <!-- ═══ SLIDE 14 ═══ -->
+  <div class="slide" id="slide-14">
+    <div class="mt16"></div>
+    <div class="apollo-row">
+      <img src="/assets/images/apollo.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
+      <div class="speech-bubble">Three edits. That's all it takes to make this sound like a person wrote it.</div>
+    </div>
+    <h2 class="heading mt8" style="font-size:clamp(22px,5vw,28px)">The three-edit fix</h2>
+    <div class="mt12">
+      <div class="edit-card">
+        <div class="edit-card-title">1. Delete filler openers</div>
+        <div class="edit-label b">Before</div>
+        <div class="edit-before">"It is worth noting that the framework is useful."</div>
+        <div class="edit-label a" style="margin-top:7px">After</div>
+        <div class="edit-after">"This framework works."</div>
+      </div>
+      <div class="edit-card">
+        <div class="edit-card-title">2. Replace em dashes with a period or nothing</div>
+        <div class="edit-label b">Before</div>
+        <div class="edit-before">"Growth — when done right — takes time."</div>
+        <div class="edit-label a" style="margin-top:7px">After</div>
+        <div class="edit-after">"Growth takes time when done right."</div>
+      </div>
+      <div class="edit-card">
+        <div class="edit-card-title">3. Add one detail only you would know</div>
+        <div class="edit-label b">Before</div>
+        <div class="edit-before">"Our team has seen strong results."</div>
+        <div class="edit-label a" style="margin-top:7px">After</div>
+        <div class="edit-after">"Since January, our People Team has cut onboarding time by two weeks."</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SLIDE 15 ═══ -->
+  <div class="slide" id="slide-15">
+    <div class="mt16"></div>
+    <div class="apollo-row">
+      <img src="/assets/images/apollo.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
+      <div class="speech-bubble">These two prompts do most of the work. Save them somewhere you will actually find them.</div>
+    </div>
+    <h2 class="heading mt8" style="font-size:clamp(22px,5vw,28px)">Your prompt kit</h2>
+    <div class="mt12">
+      <div class="block-label">Build a deck</div>
+      <div class="prompt-block" id="p15a">I need a 10-slide deck for the People Team about my personal Start, Stop, and Continue goals. Key points: [list your Start, Stop, Continue items]. Write an outline first. Tone: direct, conversational, no jargon, short sentences. Make sure there is a title slide. The second and third slides should display in big text: our company mission: 'To bring people closer together through world class immersive experiences.' And our team mission and vision: People Team Mission: 'Building the Organization and its Culture Through our People.' People Team Vision: 'Fun and Frictionless.'</div>
+      <button class="copy-btn" id="copy15a" onclick="copyText('p15a','copy15a')">Copy to Gemini</button>
+      <div class="divider"></div>
+      <div class="block-label">Check for AI slop</div>
+      <div class="prompt-block" id="p15b">Review this text and flag any phrases that sound like AI. Look for: em dashes, filler openers like 'it is worth noting' or 'in conclusion,' lists of exactly three vague things, hedged language with no specific details, phrases like 'the goal is simple,' 'it is not X it is Y,' 'at the end of the day,' 'as we continue to,' and anything with no voice that could be from any company. Suggest specific rewrites for each one.</div>
+      <button class="copy-btn" id="copy15b" onclick="copyText('p15b','copy15b')">Copy to Gemini</button>
+    </div>
+  </div>
+
+  <!-- ═══ SLIDE 16 ═══ -->
+  <div class="slide" id="slide-16">
+    <div class="spacer"></div>
+    <div class="apollo-center">
+      <img src="/assets/images/apollo.png" alt="" class="apollo-img large" onerror="this.style.opacity=0">
+    </div>
+    <h1 class="heading" style="text-align:center">You are set.</h1>
+    <div style="margin-top:16px">
+      <div class="takeaway">You know how to write a prompt that actually works.</div>
+      <div class="takeaway">You know how to attach your brand file.</div>
+      <div class="takeaway">You can spot AI writing in the wild.</div>
+      <div class="takeaway">You have two prompts ready to go.</div>
+    </div>
+    <a href="https://gemini.google.com" target="_blank" rel="noopener" class="cta-btn" style="margin-top:20px">Try it in Gemini</a>
+    <div class="spacer"></div>
+  </div>
+
+</div><!-- /slides-container -->
+
+<div id="bottom-nav">
+  <button class="nav-btn hidden" id="btn-back" onclick="prevSlide()">Back</button>
+  <span id="slide-counter">1 / 16</span>
+  <button class="nav-btn" id="btn-next" onclick="nextSlide()">Next</button>
+</div>
+
+<script>
+const TOTAL = 16;
+let current = 1;
+let foundTells = new Set();
+let revealTimer = null;
+const cState = { 'car-generic': 0, 'car-branded': 0 };
+
+function goToSlide(n) {
+  if (n < 1 || n > TOTAL) return;
+  const prev = document.getElementById('slide-' + current);
+  const next = document.getElementById('slide-' + n);
+  const fwd = n > current;
+
+  prev.classList.remove('active');
+  if (fwd) prev.classList.add('exit-left');
+  next.style.transform = fwd ? 'translateX(32px)' : 'translateX(-32px)';
+  next.classList.add('active');
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      next.style.transition = 'opacity 0.28s ease, transform 0.28s ease';
+      next.style.transform = 'translateX(0)';
+      next.style.opacity = '1';
+    });
+  });
+
+  setTimeout(() => {
+    prev.classList.remove('exit-left');
+    prev.style.transform = '';
+    next.style.transition = '';
+  }, 320);
+
+  current = n;
+  next.scrollTop = 0;
+  updateUI();
+  playAudio(n);
+
+  if (n === 13) startRevealTimer();
+  else stopRevealTimer();
+}
+
+function nextSlide() {
+  if (current === 13 && foundTells.size < 8) return;
+  if (current < TOTAL) goToSlide(current + 1);
+}
+
+function prevSlide() {
+  if (current > 1) goToSlide(current - 1);
+}
+
+function updateUI() {
+  document.getElementById('progress-fill').style.width = (current / TOTAL * 100) + '%';
+  document.getElementById('slide-counter').textContent = current + ' / ' + TOTAL;
+
+  const back = document.getElementById('btn-back');
+  current === 1 ? back.classList.add('hidden') : back.classList.remove('hidden');
+
+  const next = document.getElementById('btn-next');
+  if (current === 13 && foundTells.size < 8) {
+    next.disabled = true;
+    next.textContent = 'Keep going';
+  } else if (current === TOTAL) {
+    next.disabled = true;
+    next.textContent = 'Done';
+  } else {
+    next.disabled = false;
+    next.textContent = 'Next';
+  }
+}
+
+function playAudio(n) {
+  const src = '/assets/audio/slide-' + String(n).padStart(2, '0') + '.mp3';
+  const a = new Audio(src);
+  a.play().catch(() => {});
+}
+
+function copyText(id, btnId) {
+  const text = document.getElementById(id).textContent;
+  const btn = document.getElementById(btnId);
+  const orig = btn.textContent;
+  navigator.clipboard.writeText(text).catch(() => {
+    const t = document.createElement('textarea');
+    t.value = text; document.body.appendChild(t); t.select();
+    document.execCommand('copy'); document.body.removeChild(t);
+  });
+  showToast();
+  btn.textContent = 'Copied!';
+  btn.classList.add('copied');
+  setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
+}
+
+function showToast() {
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+// Carousels
+function cPrev(id) {
+  const el = document.getElementById(id);
+  const slides = el.querySelectorAll('.c-slide');
+  slides[cState[id]].classList.remove('active');
+  cState[id] = (cState[id] - 1 + slides.length) % slides.length;
+  slides[cState[id]].classList.add('active');
+}
+function cNext(id) {
+  const el = document.getElementById(id);
+  const slides = el.querySelectorAll('.c-slide');
+  slides[cState[id]].classList.remove('active');
+  cState[id] = (cState[id] + 1) % slides.length;
+  slides[cState[id]].classList.add('active');
+}
+
+// Slide 13
+document.querySelectorAll('.tappable').forEach(span => {
+  span.addEventListener('click', () => {
+    if (span.classList.contains('found')) return;
+    span.classList.add('found');
+    foundTells.add(span.dataset.tell);
+    document.getElementById('found-count').textContent = foundTells.size;
+    if (foundTells.size === 8) onAllFound();
+  });
+});
+
+function onAllFound() {
+  document.getElementById('bubble13').textContent = 'There they are. Every single one.';
+  document.getElementById('tell-card').classList.add('all-found');
+  document.getElementById('reveal-btn').style.display = 'none';
+  stopRevealTimer();
+  updateUI();
+}
+
+function revealAll() {
+  document.querySelectorAll('.tappable').forEach(span => {
+    span.classList.add('found');
+    foundTells.add(span.dataset.tell);
+  });
+  document.getElementById('found-count').textContent = 8;
+  onAllFound();
+}
+
+function startRevealTimer() {
+  stopRevealTimer();
+  revealTimer = setTimeout(() => {
+    if (current === 13 && foundTells.size < 8) {
+      document.getElementById('reveal-btn').style.display = 'block';
+    }
+  }, 60000);
+}
+
+function stopRevealTimer() {
+  clearTimeout(revealTimer);
+  if (current !== 13) document.getElementById('reveal-btn').style.display = 'none';
+}
+
+// Swipe
+let tx = 0, ty = 0;
+document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, { passive: true });
+document.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - tx;
+  const dy = e.changedTouches[0].clientY - ty;
+  if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 44) {
+    dx < 0 ? nextSlide() : prevSlide();
+  }
+}, { passive: true });
+
+// Arrow keys
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextSlide();
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') prevSlide();
+});
+
+updateUI();
+</script>
 </body>
 </html>
