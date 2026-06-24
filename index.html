@@ -309,6 +309,12 @@
     }
     .c-arrow.left { left: 3px; }
     .c-arrow.right { right: 3px; }
+    .carousel-dots { display: flex; justify-content: center; gap: 4px; margin-top: 6px; }
+    .carousel-dots span {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: rgba(255,255,255,0.2); transition: background 0.2s;
+    }
+    .carousel-dots span.active { background: var(--white); }
 
     /* â”€â”€ Section label â”€â”€ */
     .section-label {
@@ -605,22 +611,38 @@ Slide 10: Thank you / Reflection</div>
       <div class="carousel" id="car-generic">
         <div class="carousel-label">No brand file</div>
         <div class="carousel-track">
-          <div class="c-slide active"><img src="/assets/images/slides-generic/slide-1.png" alt="" onerror="this.parentElement.innerHTML='<div class=\'c-placeholder\'>Preview coming soon</div>'"></div>
-          <div class="c-slide"><img src="/assets/images/slides-generic/slide-2.png" alt="" onerror="this.parentElement.innerHTML='<div class=\'c-placeholder\'>Preview coming soon</div>'"></div>
-          <div class="c-slide"><img src="/assets/images/slides-generic/slide-3.png" alt="" onerror="this.parentElement.innerHTML='<div class=\'c-placeholder\'>Preview coming soon</div>'"></div>
+          <div class="c-slide active"><img src="/assets/images/slides-generic/personal_growth_plan_page_01.png" alt="" onerror="this.parentElement.innerHTML='<div class=\'c-placeholder\'>Preview coming soon</div>'"></div>
+          <div class="c-slide"><img src="/assets/images/slides-generic/personal_growth_plan_page_02.png" alt="" onerror="this.parentElement.innerHTML='<div class=\'c-placeholder\'>Preview coming soon</div>'"></div>
+          <div class="c-slide"><img src="/assets/images/slides-generic/personal_growth_plan_page_03.png" alt="" onerror="this.parentElement.innerHTML='<div class=\'c-placeholder\'>Preview coming soon</div>'"></div>
+          <div class="c-slide"><img src="/assets/images/slides-generic/personal_growth_plan_page_04.png" alt="" onerror="this.parentElement.innerHTML='<div class=\'c-placeholder\'>Preview coming soon</div>'"></div>
+          <div class="c-slide"><img src="/assets/images/slides-generic/personal_growth_plan_page_05.png" alt="" onerror="this.parentElement.innerHTML='<div class=\'c-placeholder\'>Preview coming soon</div>'"></div>
+          <div class="c-slide"><img src="/assets/images/slides-generic/personal_growth_plan_page_06.png" alt="" onerror="this.parentElement.innerHTML='<div class=\'c-placeholder\'>Preview coming soon</div>'"></div>
+          <div class="c-slide"><img src="/assets/images/slides-generic/personal_growth_plan_page_07.png" alt="" onerror="this.parentElement.innerHTML='<div class=\'c-placeholder\'>Preview coming soon</div>'"></div>
+          <div class="c-slide"><img src="/assets/images/slides-generic/personal_growth_plan_page_08.png" alt="" onerror="this.parentElement.innerHTML='<div class=\'c-placeholder\'>Preview coming soon</div>'"></div>
+          <div class="c-slide"><img src="/assets/images/slides-generic/personal_growth_plan_page_09.png" alt="" onerror="this.parentElement.innerHTML='<div class=\'c-placeholder\'>Preview coming soon</div>'"></div>
+          <div class="c-slide"><img src="/assets/images/slides-generic/personal_growth_plan_page_10.png" alt="" onerror="this.parentElement.innerHTML='<div class=\'c-placeholder\'>Preview coming soon</div>'"></div>
         </div>
         <button class="c-arrow left" onclick="cPrev('car-generic')">&#8249;</button>
         <button class="c-arrow right" onclick="cNext('car-generic')">&#8250;</button>
+        <div class="carousel-dots" id="dots-car-generic"></div>
       </div>
       <div class="carousel" id="car-branded">
         <div class="carousel-label">With SBVR template</div>
         <div class="carousel-track">
-          <div class="c-slide active"><img src="/assets/images/slides-branded/slide-1.png" alt="" onerror="this.parentElement.innerHTML='<div class=\'c-placeholder\'>Preview coming soon</div>'"></div>
-          <div class="c-slide"><img src="/assets/images/slides-branded/slide-2.png" alt="" onerror="this.parentElement.innerHTML='<div class=\'c-placeholder\'>Preview coming soon</div>'"></div>
-          <div class="c-slide"><img src="/assets/images/slides-branded/slide-3.png" alt="" onerror="this.parentElement.innerHTML='<div class=\'c-placeholder\'>Preview coming soon</div>'"></div>
+          <div class="c-slide active"><img src="/assets/images/slides-branded/page-01.png" alt="" onerror="this.parentElement.innerHTML='<div class=\'c-placeholder\'>Preview coming soon</div>'"></div>
+          <div class="c-slide"><img src="/assets/images/slides-branded/page-02.png" alt="" onerror="this.parentElement.innerHTML='<div class=\'c-placeholder\'>Preview coming soon</div>'"></div>
+          <div class="c-slide"><img src="/assets/images/slides-branded/page-03.png" alt="" onerror="this.parentElement.innerHTML='<div class=\'c-placeholder\'>Preview coming soon</div>'"></div>
+          <div class="c-slide"><img src="/assets/images/slides-branded/page-04.png" alt="" onerror="this.parentElement.innerHTML='<div class=\'c-placeholder\'>Preview coming soon</div>'"></div>
+          <div class="c-slide"><img src="/assets/images/slides-branded/page-05.png" alt="" onerror="this.parentElement.innerHTML='<div class=\'c-placeholder\'>Preview coming soon</div>'"></div>
+          <div class="c-slide"><img src="/assets/images/slides-branded/page-06.png" alt="" onerror="this.parentElement.innerHTML='<div class=\'c-placeholder\'>Preview coming soon</div>'"></div>
+          <div class="c-slide"><img src="/assets/images/slides-branded/page-07.png" alt="" onerror="this.parentElement.innerHTML='<div class=\'c-placeholder\'>Preview coming soon</div>'"></div>
+          <div class="c-slide"><img src="/assets/images/slides-branded/page-08.png" alt="" onerror="this.parentElement.innerHTML='<div class=\'c-placeholder\'>Preview coming soon</div>'"></div>
+          <div class="c-slide"><img src="/assets/images/slides-branded/page-09.png" alt="" onerror="this.parentElement.innerHTML='<div class=\'c-placeholder\'>Preview coming soon</div>'"></div>
+          <div class="c-slide"><img src="/assets/images/slides-branded/page-10.png" alt="" onerror="this.parentElement.innerHTML='<div class=\'c-placeholder\'>Preview coming soon</div>'"></div>
         </div>
         <button class="c-arrow left" onclick="cPrev('car-branded')">&#8249;</button>
         <button class="c-arrow right" onclick="cNext('car-branded')">&#8250;</button>
+        <div class="carousel-dots" id="dots-car-branded"></div>
       </div>
     </div>
   </div>
@@ -885,12 +907,32 @@ function showToast() {
 }
 
 // Carousels
+function initDots(id) {
+  const el = document.getElementById(id);
+  const slides = el.querySelectorAll('.c-slide');
+  const dotsEl = document.getElementById('dots-' + id);
+  if (!dotsEl) return;
+  dotsEl.innerHTML = '';
+  slides.forEach((_, i) => {
+    const d = document.createElement('span');
+    if (i === 0) d.classList.add('active');
+    dotsEl.appendChild(d);
+  });
+}
+function updateDots(id) {
+  const dotsEl = document.getElementById('dots-' + id);
+  if (!dotsEl) return;
+  dotsEl.querySelectorAll('span').forEach((d, i) => {
+    d.classList.toggle('active', i === cState[id]);
+  });
+}
 function cPrev(id) {
   const el = document.getElementById(id);
   const slides = el.querySelectorAll('.c-slide');
   slides[cState[id]].classList.remove('active');
   cState[id] = (cState[id] - 1 + slides.length) % slides.length;
   slides[cState[id]].classList.add('active');
+  updateDots(id);
 }
 function cNext(id) {
   const el = document.getElementById(id);
@@ -898,7 +940,10 @@ function cNext(id) {
   slides[cState[id]].classList.remove('active');
   cState[id] = (cState[id] + 1) % slides.length;
   slides[cState[id]].classList.add('active');
+  updateDots(id);
 }
+initDots('car-generic');
+initDots('car-branded');
 
 // Slide 13
 document.querySelectorAll('.tappable').forEach(span => {
