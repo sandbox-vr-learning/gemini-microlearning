@@ -1099,6 +1099,15 @@ function nextTell() {
 
 updateTell = () => {}; // placeholder
 updateUI();
+
+// Play slide 1 audio on first interaction (browsers block autoplay until user gesture)
+function onFirstInteraction() {
+  if (current === 1) playAudio(1);
+  document.removeEventListener('click', onFirstInteraction);
+  document.removeEventListener('keydown', onFirstInteraction);
+}
+document.addEventListener('click', onFirstInteraction);
+document.addEventListener('keydown', onFirstInteraction);
 </script>
 </body>
 </html>
