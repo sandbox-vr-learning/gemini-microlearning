@@ -936,21 +936,25 @@ function updateDots(id) {
     d.classList.toggle('active', i === cState[id]);
   });
 }
-function cPrev(id) {
+const CAROUSEL_IDS = ['car-generic', 'car-branded'];
+function setCarouselIndex(id, idx) {
   const el = document.getElementById(id);
   const slides = el.querySelectorAll('.c-slide');
   slides[cState[id]].classList.remove('active');
-  cState[id] = (cState[id] - 1 + slides.length) % slides.length;
+  cState[id] = (idx + slides.length) % slides.length;
   slides[cState[id]].classList.add('active');
   updateDots(id);
 }
+function syncCarousels(newIdx) {
+  CAROUSEL_IDS.forEach(id => setCarouselIndex(id, newIdx));
+}
+function cPrev(id) {
+  const newIdx = cState[id] - 1;
+  syncCarousels(newIdx);
+}
 function cNext(id) {
-  const el = document.getElementById(id);
-  const slides = el.querySelectorAll('.c-slide');
-  slides[cState[id]].classList.remove('active');
-  cState[id] = (cState[id] + 1) % slides.length;
-  slides[cState[id]].classList.add('active');
-  updateDots(id);
+  const newIdx = cState[id] + 1;
+  syncCarousels(newIdx);
 }
 initDots('car-generic');
 initDots('car-branded');
