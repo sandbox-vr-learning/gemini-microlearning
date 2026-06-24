@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Prompt it. Slop-check it. — Sandbox VR</title>
+  <title>Prompt it. Slop-check it. â€” Sandbox VR</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
@@ -38,7 +38,7 @@
       font-family: var(--font);
     }
 
-    /* ── Progress bar ── */
+    /* â”€â”€ Progress bar â”€â”€ */
     #progress-bar {
       position: fixed; top: 0; left: 0; right: 0; height: 4px;
       background: rgba(255,255,255,0.12); z-index: 200;
@@ -48,7 +48,7 @@
       transition: width 0.35s ease; width: 6.25%;
     }
 
-    /* ── Logo ── */
+    /* â”€â”€ Logo â”€â”€ */
     #logo {
       position: fixed; top: 14px; left: 16px; z-index: 200; height: 26px;
     }
@@ -58,7 +58,7 @@
       font-weight: 700; font-size: 13px; letter-spacing: 0.06em; color: var(--white);
     }
 
-    /* ── Slides ── */
+    /* â”€â”€ Slides â”€â”€ */
     #slides-container {
       position: fixed; inset: 0; overflow: hidden;
     }
@@ -89,7 +89,7 @@
       to   { opacity: 1; transform: translateX(0); }
     }
 
-    /* ── Bottom nav ── */
+    /* â”€â”€ Bottom nav â”€â”€ */
     #bottom-nav {
       position: fixed; bottom: 0; left: 0; right: 0; height: 60px;
       background: rgba(27,36,47,0.96); backdrop-filter: blur(12px);
@@ -110,7 +110,7 @@
     #btn-next:disabled { background: rgba(0,118,255,0.35); border-color: transparent; opacity: 1; cursor: not-allowed; }
     #slide-counter { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.45); letter-spacing: 0.05em; }
 
-    /* ── Apollo ── */
+    /* â”€â”€ Apollo â”€â”€ */
     .apollo-row {
       display: flex; align-items: flex-end; gap: 10px; margin-bottom: 20px;
     }
@@ -152,7 +152,7 @@
     .apollo-center .apollo-img { margin-bottom: 14px; }
     .apollo-center .speech-bubble { border-radius: 14px; max-width: 300px; text-align: left; }
 
-    /* ── Type ── */
+    /* â”€â”€ Type â”€â”€ */
     .heading {
       font-size: clamp(26px, 6.5vw, 40px); font-weight: 700;
       letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 10px;
@@ -168,7 +168,7 @@
       padding: 4px 12px; border-radius: 100px; margin-right: 6px; margin-bottom: 18px;
     }
 
-    /* ── Buttons ── */
+    /* â”€â”€ Buttons â”€â”€ */
     .cta-btn {
       display: flex; align-items: center; justify-content: center;
       width: 100%; padding: 14px; border-radius: 100px;
@@ -188,7 +188,7 @@
     .copy-btn:hover { background: #005fd4; }
     .copy-btn.copied { background: #27a75c; }
 
-    /* ── Cards ── */
+    /* â”€â”€ Cards â”€â”€ */
     .card {
       background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
       border-radius: 14px; padding: 16px; margin-bottom: 12px;
@@ -201,7 +201,7 @@
     .card-label.green { color: #4ecb8d; }
     .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
 
-    /* ── Prompt block ── */
+    /* â”€â”€ Prompt block â”€â”€ */
     .prompt-block {
       background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
       border-radius: 12px; padding: 14px; font-size: 13px; line-height: 1.65;
@@ -213,7 +213,7 @@
       color: rgba(255,255,255,0.38); margin-bottom: 5px;
     }
 
-    /* ── Mock Gemini ── */
+    /* â”€â”€ Mock Gemini â”€â”€ */
     .gemini-mock {
       background: #1e1e2e; border-radius: 14px; padding: 14px;
       cursor: pointer; margin-bottom: 14px; position: relative;
@@ -242,13 +242,13 @@
       display: flex; align-items: center; justify-content: center;
     }
 
-    /* ── Gemini response ── */
+    /* â”€â”€ Gemini response â”€â”€ */
     .gemini-response {
       background: #1e1e2e; border-radius: 14px; padding: 14px; margin-bottom: 12px;
     }
     .gemini-response-text { font-size: 13px; line-height: 1.8; color: rgba(255,255,255,0.78); white-space: pre-wrap; }
 
-    /* ── Chips ── */
+    /* â”€â”€ Chips â”€â”€ */
     .chips { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 14px; }
     .chip {
       background: rgba(255,209,102,0.1); border: 1px solid rgba(255,209,102,0.28);
@@ -256,7 +256,7 @@
       padding: 5px 11px; border-radius: 100px;
     }
 
-    /* ── Screenshot ── */
+    /* â”€â”€ Screenshot â”€â”€ */
     .screenshot-card {
       width: 100%; border-radius: 14px; overflow: hidden;
       background: rgba(255,255,255,0.04); margin-bottom: 14px;
@@ -267,7 +267,7 @@
       font-size: 13px; color: rgba(255,255,255,0.28);
     }
 
-    /* ── Steps ── */
+    /* â”€â”€ Steps â”€â”€ */
     .steps { list-style: none; margin-bottom: 18px; }
     .steps li { display: flex; align-items: flex-start; gap: 11px; margin-bottom: 13px; font-size: 15px; line-height: 1.5; color: rgba(255,255,255,0.82); }
     .step-num {
@@ -276,14 +276,14 @@
       font-size: 11px; font-weight: 700; flex-shrink: 0; margin-top: 2px;
     }
 
-    /* ── Callout ── */
+    /* â”€â”€ Callout â”€â”€ */
     .callout {
       background: rgba(0,118,255,0.07); border: 1px solid rgba(0,118,255,0.2);
       border-radius: 12px; padding: 13px 15px; font-size: 14px; line-height: 1.6;
       color: rgba(255,255,255,0.78); margin-bottom: 14px;
     }
 
-    /* ── Carousel ── */
+    /* â”€â”€ Carousel â”€â”€ */
     .carousels-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
     .carousel { position: relative; }
     .carousel-label {
@@ -310,7 +310,7 @@
     .c-arrow.left { left: 3px; }
     .c-arrow.right { right: 3px; }
 
-    /* ── Section label ── */
+    /* â”€â”€ Section label â”€â”€ */
     .section-label {
       display: inline-block; background: rgba(255,209,102,0.1);
       border: 1px solid rgba(255,209,102,0.28); color: var(--yellow);
@@ -318,12 +318,12 @@
       padding: 5px 13px; border-radius: 100px; margin-bottom: 10px;
     }
 
-    /* ── Five tells ── */
+    /* â”€â”€ Five tells â”€â”€ */
     .tell-item { margin-bottom: 12px; padding: 13px 14px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; }
     .tell-title { font-weight: 700; font-size: 15px; margin-bottom: 5px; }
     .tell-example { font-size: 13px; font-style: italic; color: rgba(255,255,255,0.4); font-family: monospace; line-height: 1.5; }
 
-    /* ── Slide 13 ── */
+    /* â”€â”€ Slide 13 â”€â”€ */
     .para-card {
       background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
       border-radius: 14px; padding: 16px; font-size: 14px; line-height: 1.8;
@@ -344,7 +344,7 @@
       padding: 10px; border-radius: 100px; cursor: pointer; margin-bottom: 12px;
     }
 
-    /* ── Follow-along task cards ── */
+    /* â”€â”€ Follow-along task cards â”€â”€ */
     .do-now {
       background: rgba(255,209,102,0.06); border: 1.5px solid rgba(255,209,102,0.28);
       border-radius: 12px; padding: 12px 14px; margin-top: 12px;
@@ -360,7 +360,7 @@
       font-size: 13px; line-height: 1.5; color: rgba(255,140,140,0.9); font-weight: 600;
     }
 
-    /* ── Slide 14 edit cards ── */
+    /* â”€â”€ Slide 14 edit cards â”€â”€ */
     .edit-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 13px; padding: 15px; margin-bottom: 12px; }
     .edit-card-title { font-size: 12px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 9px; }
     .edit-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 3px; }
@@ -369,17 +369,17 @@
     .edit-before { background: rgba(255,70,70,0.07); border: 1px solid rgba(255,70,70,0.14); border-radius: 8px; padding: 9px 11px; font-size: 13px; line-height: 1.5; color: rgba(255,120,120,0.88); margin-bottom: 7px; }
     .edit-after { background: rgba(0,195,95,0.07); border: 1px solid rgba(0,195,95,0.14); border-radius: 8px; padding: 9px 11px; font-size: 13px; line-height: 1.5; color: rgba(80,215,145,0.88); }
 
-    /* ── Slide 16 takeaways ── */
+    /* â”€â”€ Slide 16 takeaways â”€â”€ */
     .takeaway { font-size: clamp(15px, 3.8vw, 18px); line-height: 1.6; color: rgba(255,255,255,0.82); padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
     .takeaway:last-child { border-bottom: none; }
 
-    /* ── Divider ── */
+    /* â”€â”€ Divider â”€â”€ */
     .divider { height: 1px; background: rgba(255,255,255,0.08); margin: 14px 0; }
 
-    /* ── Small caption ── */
+    /* â”€â”€ Small caption â”€â”€ */
     .caption { font-size: 12px; color: rgba(255,255,255,0.38); text-align: center; margin-top: -6px; margin-bottom: 14px; }
 
-    /* ── Toast ── */
+    /* â”€â”€ Toast â”€â”€ */
     #toast {
       position: fixed; bottom: 72px; left: 50%; transform: translateX(-50%) translateY(16px);
       background: #27a75c; color: white; font-family: var(--font); font-size: 14px; font-weight: 600;
@@ -410,7 +410,7 @@
 
 <div id="slides-container">
 
-  <!-- ═══ SLIDE 1 ═══ -->
+  <!-- â•â•â• SLIDE 1 â•â•â• -->
   <div class="slide active" id="slide-1">
     <div class="mt16"></div>
     <div class="apollo-row">
@@ -427,7 +427,7 @@
     <button class="cta-btn" onclick="goToSlide(2)">Let's go</button>
   </div>
 
-  <!-- ═══ SLIDE 2 ═══ -->
+  <!-- â•â•â• SLIDE 2 â•â•â• -->
   <div class="slide" id="slide-2">
     <div class="mt16"></div>
     <div class="apollo-row">
@@ -449,11 +449,11 @@
     </div>
   </div>
 
-  <!-- ═══ SLIDE 3 ═══ -->
+  <!-- â•â•â• SLIDE 3 â•â•â• -->
   <div class="slide" id="slide-3">
     <div class="mt16"></div>
     <div class="apollo-row">
-      <img src="/assets/images/apollo.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
+      <img src="/assets/images/apollo_with_ipad.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
       <div class="speech-bubble">Open Gemini now. Follow along. This works a lot better if you're actually doing it.</div>
     </div>
     <h2 class="heading mt8">Open Gemini</h2>
@@ -464,11 +464,11 @@
     <a href="https://gemini.google.com" target="_blank" rel="noopener" class="cta-btn">Open Gemini</a>
   </div>
 
-  <!-- ═══ SLIDE 4 ═══ -->
+  <!-- â•â•â• SLIDE 4 â•â•â• -->
   <div class="slide" id="slide-4">
     <div class="mt16"></div>
     <div class="apollo-row">
-      <img src="/assets/images/apollo.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
+      <img src="/assets/images/apollo_with_ipad.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
       <div class="speech-bubble">If you type "make me a presentation about my goals" into Gemini, you will get a vague presentation about your "goals". It will be baaad. Here's why, and how to fix it before you waste your time.</div>
     </div>
     <h2 class="heading mt8" style="font-size:clamp(22px,5.5vw,32px)">Don't just say "make me slides"</h2>
@@ -485,12 +485,12 @@
     <p class="caption">Same request. Completely different output.</p>
   </div>
 
-  <!-- ═══ SLIDE 5 ═══ -->
+  <!-- â•â•â• SLIDE 5 â•â•â• -->
   <div class="slide" id="slide-5">
     <div class="mt16"></div>
     <div class="apollo-row">
-      <img src="/assets/images/apollo.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
-      <div class="speech-bubble">Your turn. Switch to your Gemini tab. Fill in your actual Start, Stop, Continue goals and paste this prompt in. But do not hit send yet — we are adding one more thing first.</div>
+      <img src="/assets/images/apollo_with_ipad.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
+      <div class="speech-bubble">Your turn. Switch to your Gemini tab. Fill in your actual Start, Stop, Continue goals and paste this prompt in. But do not hit send yet â€” we are adding one more thing first.</div>
     </div>
     <h2 class="heading mt8" style="font-size:clamp(22px,5vw,30px)">The prompt</h2>
     <div class="mt12">
@@ -511,35 +511,35 @@
       <div class="do-now">
         <div class="do-now-label">Your task right now</div>
         <div class="do-now-body">Paste this prompt into Gemini. Replace [list your Start, Stop, Continue items] with your actual goals. Then stop.</div>
-        <div class="do-now-warn">Do not hit send yet. Next slide adds the tone instruction — Gemini needs both before you send.</div>
+        <div class="do-now-warn">Do not hit send yet. Next slide adds the tone instruction â€” Gemini needs both before you send.</div>
       </div>
     </div>
   </div>
 
-  <!-- ═══ SLIDE 6 ═══ -->
+  <!-- â•â•â• SLIDE 6 â•â•â• -->
   <div class="slide" id="slide-6">
     <div class="mt16"></div>
     <div class="apollo-row">
-      <img src="/assets/images/apollo.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
+      <img src="/assets/images/apollo_with_ipad.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
       <div class="speech-bubble">The prompt asks Gemini for an outline first. That is on purpose. Read it, fix the order if needed, then move on. Still do not send to generate slides yet.</div>
     </div>
     <h2 class="heading mt8" style="font-size:clamp(20px,5vw,28px)">Ask for the outline first</h2>
     <div class="gemini-response mt12">
       <div class="gemini-response-text">Sure! Here's an outline for your Start, Stop, Continue deck:
 
-Slide 1: Title — [Your Name], People Team
+Slide 1: Title â€” [Your Name], People Team
 Slide 2: Company Mission
 Slide 3: Team Mission and Vision
-Slide 4: Start — [Your Start goals]
+Slide 4: Start â€” [Your Start goals]
 Slide 5: Start continued
-Slide 6: Stop — [Your Stop goals]
+Slide 6: Stop â€” [Your Stop goals]
 Slide 7: Stop continued
-Slide 8: Continue — [Your Continue goals]
+Slide 8: Continue â€” [Your Continue goals]
 Slide 9: Continue continued
 Slide 10: Thank you / Reflection</div>
     </div>
     <div class="chips">
-      <span class="chip">Cut the 'continued' slides — combine them</span>
+      <span class="chip">Cut the 'continued' slides â€” combine them</span>
       <span class="chip">Add your name to slide 1</span>
       <span class="chip">Reorder if needed</span>
     </div>
@@ -550,12 +550,12 @@ Slide 10: Thank you / Reflection</div>
     </div>
   </div>
 
-  <!-- ═══ SLIDE 7 ═══ -->
+  <!-- â•â•â• SLIDE 7 â•â•â• -->
   <div class="slide" id="slide-7">
     <div class="mt16"></div>
     <div class="apollo-row">
-      <img src="/assets/images/apollo.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
-      <div class="speech-bubble">Without this, Gemini writes like a consultant billing by the word. Paste this into your Gemini chat right now — before you tell it to build. Then hit send on your outline approval.</div>
+      <img src="/assets/images/apollo_with_ipad.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
+      <div class="speech-bubble">Without this, Gemini writes like a consultant billing by the word. Paste this into your Gemini chat right now â€” before you tell it to build. Then hit send on your outline approval.</div>
     </div>
     <h2 class="heading mt8">Give it a tone</h2>
     <div class="mt16">
@@ -568,11 +568,11 @@ Slide 10: Thank you / Reflection</div>
     </div>
   </div>
 
-  <!-- ═══ SLIDE 8 ═══ -->
+  <!-- â•â•â• SLIDE 8 â•â•â• -->
   <div class="slide" id="slide-8">
     <div class="mt16"></div>
     <div class="apollo-row">
-      <img src="/assets/images/apollo.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
+      <img src="/assets/images/apollo_with_ipad.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
       <div class="speech-bubble">Gemini can pull files straight from your Google Drive. Here's how.</div>
     </div>
     <h2 class="heading mt8" style="font-size:clamp(20px,5vw,28px)">Attach from Google Drive</h2>
@@ -589,15 +589,15 @@ Slide 10: Thank you / Reflection</div>
     <div class="callout">This deck was built by Chandler on the People Team. It is the official Sandbox template. Attaching it tells Gemini exactly how your slides should look.</div>
     <div class="do-now">
       <div class="do-now-label">Your task right now</div>
-      <div class="do-now-body">Go back to your Gemini chat. Click "+" and attach the SBVR Slides Made Easy file from Drive before you send anything else. If you already sent — start a new message and attach it now.</div>
+      <div class="do-now-body">Go back to your Gemini chat. Click "+" and attach the SBVR Slides Made Easy file from Drive before you send anything else. If you already sent â€” start a new message and attach it now.</div>
     </div>
   </div>
 
-  <!-- ═══ SLIDE 9 ═══ -->
+  <!-- â•â•â• SLIDE 9 â•â•â• -->
   <div class="slide" id="slide-9">
     <div class="mt16"></div>
     <div class="apollo-row">
-      <img src="/assets/images/apollo.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
+      <img src="/assets/images/apollo_with_ipad.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
       <div class="speech-bubble">Here's what happens when you attach the brand file. Same prompt. Two very different results.</div>
     </div>
     <h2 class="heading mt8">Generic vs Branded</h2>
@@ -625,17 +625,17 @@ Slide 10: Thank you / Reflection</div>
     </div>
   </div>
 
-  <!-- ═══ SLIDE 10 ═══ -->
+  <!-- â•â•â• SLIDE 10 â•â•â• -->
   <div class="slide" id="slide-10">
     <div class="mt16"></div>
     <div class="apollo-row">
-      <img src="/assets/images/apollo.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
+      <img src="/assets/images/apollo_with_ipad.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
       <div class="speech-bubble">Gemini builds the whole deck right there in your browser window. You can preview every slide before it ever touches Google Slides. When you like what you see, one button sends it over.</div>
     </div>
     <h2 class="heading mt8" style="font-size:clamp(20px,5vw,28px)">Preview it. Then export.</h2>
     <ol class="steps mt12">
       <li><span class="step-num">1</span>After Gemini generates your deck, a slide preview panel opens in the Gemini browser window</li>
-      <li><span class="step-num">2</span>Use the arrow buttons to flip through every slide — check the content and order</li>
+      <li><span class="step-num">2</span>Use the arrow buttons to flip through every slide â€” check the content and order</li>
       <li><span class="step-num">3</span>When it looks right, click "Export to Slides" in the top right of the preview panel</li>
       <li><span class="step-num">4</span>Google Slides opens with your deck already built</li>
       <li><span class="step-num">5</span>Apply the SBVR Slides Made Easy theme from the Themes panel to finish</li>
@@ -646,7 +646,7 @@ Slide 10: Thank you / Reflection</div>
     </div>
   </div>
 
-  <!-- ═══ SLIDE 11 ═══ -->
+  <!-- â•â•â• SLIDE 11 â•â•â• -->
   <div class="slide" id="slide-11">
     <div class="spacer"></div>
     <div class="apollo-center">
@@ -659,7 +659,7 @@ Slide 10: Thank you / Reflection</div>
     <div class="spacer"></div>
   </div>
 
-  <!-- ═══ SLIDE 12 ═══ -->
+  <!-- â•â•â• SLIDE 12 â•â•â• -->
   <div class="slide" id="slide-12">
     <div class="mt16"></div>
     <div class="apollo-row">
@@ -670,7 +670,7 @@ Slide 10: Thank you / Reflection</div>
     <div class="mt12">
       <div class="tell-item">
         <div class="tell-title">1. Em dashes everywhere.</div>
-        <div class="tell-example">"This is important — in fact — it changes everything."</div>
+        <div class="tell-example">"This is important â€” in fact â€” it changes everything."</div>
       </div>
       <div class="tell-item">
         <div class="tell-title">2. Filler openers.</div>
@@ -686,23 +686,23 @@ Slide 10: Thank you / Reflection</div>
       </div>
       <div class="tell-item">
         <div class="tell-title">5. No voice.</div>
-        <div class="tell-example">"The goal is simple — it is not about the output, it is about the process."</div>
+        <div class="tell-example">"The goal is simple â€” it is not about the output, it is about the process."</div>
       </div>
     </div>
   </div>
 
-  <!-- ═══ SLIDE 13 ═══ -->
+  <!-- â•â•â• SLIDE 13 â•â•â• -->
   <div class="slide" id="slide-13">
     <div class="mt16"></div>
     <div class="apollo-row">
-      <img src="/assets/images/apollo.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
+      <img src="/assets/images/apollo_with_ipad.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
       <div class="speech-bubble" id="bubble13">This was written by Gemini. Tap every phrase that gives it away. All of them. You cannot move on until you find all 14.</div>
     </div>
     <p class="found-counter"><span id="found-count">0</span> of 14 found.</p>
     <div class="para-card" id="tell-card">
-      <p style="font-weight:700;margin-bottom:10px">🌟 Start, Stop, Continue: A Framework for Growth</p>
+      <p style="font-weight:700;margin-bottom:10px">ðŸŒŸ Start, Stop, Continue: A Framework for Growth</p>
 
-      <p style="margin-bottom:12px"><span class="tappable" data-tell="1">It is worth noting</span> that the Start, Stop, Continue framework<span class="tappable" data-tell="2"> — when applied thoughtfully — </span>is one of the most powerful self-reflection tools available to professionals today. <span class="tappable" data-tell="3">In today's world,</span> personal development is not just encouraged — it is expected. <span class="tappable" data-tell="4">This serves as a reminder that</span> intentional growth does not happen by accident.</p>
+      <p style="margin-bottom:12px"><span class="tappable" data-tell="1">It is worth noting</span> that the Start, Stop, Continue framework<span class="tappable" data-tell="2"> â€” when applied thoughtfully â€” </span>is one of the most powerful self-reflection tools available to professionals today. <span class="tappable" data-tell="3">In today's world,</span> personal development is not just encouraged â€” it is expected. <span class="tappable" data-tell="4">This serves as a reminder that</span> intentional growth does not happen by accident.</p>
 
       <p style="margin-bottom:6px">Key areas of focus include:</p>
       <ul>
@@ -711,14 +711,14 @@ Slide 10: Thank you / Reflection</div>
         <li><span class="tappable" data-tell="7"><strong>Alignment:</strong> Ensuring personal goals stay connected to the broader organizational vision</span></li>
       </ul>
 
-      <p style="margin-bottom:12px"><span class="tappable" data-tell="8">As we continue to</span> evolve as an organization, <span class="tappable" data-tell="9">it is worth mentioning</span> that <span class="tappable" data-tell="10">this exercise is not simply about filling out a template — it is about cultivating a mindset of continuous improvement.</span> <span class="tappable" data-tell="11">At the end of the day,</span> <span class="tappable" data-tell="12">the goal is not to list actions, but to demonstrate a commitment to real change.</span> Our teams have seen <span class="tappable" data-tell="13">strong results across a number of key initiatives this quarter,</span> and this framework positions us to build on that momentum going forward.</p>
+      <p style="margin-bottom:12px"><span class="tappable" data-tell="8">As we continue to</span> evolve as an organization, <span class="tappable" data-tell="9">it is worth mentioning</span> that <span class="tappable" data-tell="10">this exercise is not simply about filling out a template â€” it is about cultivating a mindset of continuous improvement.</span> <span class="tappable" data-tell="11">At the end of the day,</span> <span class="tappable" data-tell="12">the goal is not to list actions, but to demonstrate a commitment to real change.</span> Our teams have seen <span class="tappable" data-tell="13">strong results across a number of key initiatives this quarter,</span> and this framework positions us to build on that momentum going forward.</p>
 
-      <p><span class="tappable" data-tell="14">In conclusion,</span> growth is not linear. The Start, Stop, Continue approach — when leveraged effectively — becomes a catalyst for both individual and team-level transformation. This is the kind of intentional work that moves organizations forward.</p>
+      <p><span class="tappable" data-tell="14">In conclusion,</span> growth is not linear. The Start, Stop, Continue approach â€” when leveraged effectively â€” becomes a catalyst for both individual and team-level transformation. This is the kind of intentional work that moves organizations forward.</p>
     </div>
     <button id="reveal-btn" onclick="revealAll()">Show me the rest</button>
   </div>
 
-  <!-- ═══ SLIDE 14 ═══ -->
+  <!-- â•â•â• SLIDE 14 â•â•â• -->
   <div class="slide" id="slide-14">
     <div class="mt16"></div>
     <div class="apollo-row">
@@ -737,7 +737,7 @@ Slide 10: Thank you / Reflection</div>
       <div class="edit-card">
         <div class="edit-card-title">2. Replace em dashes with a period or nothing</div>
         <div class="edit-label b">Before</div>
-        <div class="edit-before">"Growth — when done right — takes time."</div>
+        <div class="edit-before">"Growth â€” when done right â€” takes time."</div>
         <div class="edit-label a" style="margin-top:7px">After</div>
         <div class="edit-after">"Growth takes time when done right."</div>
       </div>
@@ -751,7 +751,7 @@ Slide 10: Thank you / Reflection</div>
     </div>
   </div>
 
-  <!-- ═══ SLIDE 15 ═══ -->
+  <!-- â•â•â• SLIDE 15 â•â•â• -->
   <div class="slide" id="slide-15">
     <div class="mt16"></div>
     <div class="apollo-row">
@@ -770,7 +770,7 @@ Slide 10: Thank you / Reflection</div>
     </div>
   </div>
 
-  <!-- ═══ SLIDE 16 ═══ -->
+  <!-- â•â•â• SLIDE 16 â•â•â• -->
   <div class="slide" id="slide-16">
     <div class="spacer"></div>
     <div class="apollo-center">
