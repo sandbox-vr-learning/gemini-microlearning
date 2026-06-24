@@ -68,14 +68,21 @@
       padding: 58px 22px 72px;
       overflow-y: auto; overflow-x: hidden;
       display: flex; flex-direction: column;
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.28s ease, transform 0.28s ease;
+      opacity: 0; pointer-events: none; visibility: hidden;
+      transition: opacity 0.28s ease, transform 0.28s ease, visibility 0s linear 0.28s;
       transform: translateX(32px);
       -ms-overflow-style: none; scrollbar-width: none;
     }
     .slide::-webkit-scrollbar { display: none; }
-    .slide.active { opacity: 1; pointer-events: all; transform: translateX(0); }
-    .slide.exit-left { opacity: 0; transform: translateX(-32px); transition: opacity 0.28s ease, transform 0.28s ease; }
+    .slide.active {
+      opacity: 1; pointer-events: all; visibility: visible;
+      transform: translateX(0);
+      transition: opacity 0.28s ease, transform 0.28s ease, visibility 0s linear 0s;
+    }
+    .slide.exit-left {
+      opacity: 0; transform: translateX(-32px); visibility: hidden;
+      transition: opacity 0.28s ease, transform 0.28s ease, visibility 0s linear 0.28s;
+    }
 
     /* ── Bottom nav ── */
     #bottom-nav {
@@ -724,24 +731,22 @@ function goToSlide(n) {
   const next = document.getElementById('slide-' + n);
   const fwd = n > current;
 
-  prev.classList.remove('active');
-  if (fwd) prev.classList.add('exit-left');
+  // Prime next slide's starting position before making it visible
+  next.style.transition = 'none';
   next.style.transform = fwd ? 'translateX(32px)' : 'translateX(-32px)';
-  next.classList.add('active');
 
   requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      next.style.transition = 'opacity 0.28s ease, transform 0.28s ease';
-      next.style.transform = 'translateX(0)';
-      next.style.opacity = '1';
-    });
-  });
-
-  setTimeout(() => {
-    prev.classList.remove('exit-left');
-    prev.style.transform = '';
+    // Now animate both slides
     next.style.transition = '';
-  }, 320);
+    next.classList.add('active');
+    prev.classList.remove('active');
+    if (fwd) prev.classList.add('exit-left');
+
+    setTimeout(() => {
+      prev.classList.remove('exit-left');
+      next.style.transform = '';
+    }, 320);
+  });
 
   current = n;
   next.scrollTop = 0;
