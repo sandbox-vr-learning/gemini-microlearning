@@ -462,6 +462,14 @@
     .tell-next-btn:hover { background: #005fd4; }
     .tell-next-btn:disabled { background: #27a75c; cursor: default; }
 
+
+    /* Slide 9 full-width carousel override */
+    #slide-9 { padding-left: 0; padding-right: 0; }
+    #slide-9 > * { max-width: 100% !important; padding-left: 20px; padding-right: 20px; }
+    #slide-9 .carousels-row { padding-left: 12px; padding-right: 12px; max-width: 100% !important; }
+    #slide-9 .carousel { flex: 1; min-width: 0; }
+    #slide-9 .c-slide img { max-height: 520px; }
+
     audio { display: none; }
 
     .spacer { flex: 1; }
@@ -526,7 +534,7 @@
     <div class="mt16"></div>
     <div class="apollo-row">
       <img src="assets/images/apollo_with_ipad.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
-      <div class="speech-bubble">Open Gemini now. Before you do anything, make sure <strong>Gemini 2.0 Flash</strong> is selected in the model picker, it gives the best results for building decks. Follow along.</div>
+      <div class="speech-bubble">Open Gemini now. Before you do anything, make sure <strong>Gemini 3.1 Pro</strong> is selected in the model picker, it gives the best results for building decks. Follow along.</div>
     </div>
     <h2 class="heading mt8">Open Gemini</h2>
     <div class="screenshot-card mt12">
@@ -535,7 +543,7 @@
     </div>
     <div class="do-now" style="margin-top:12px">
       <div class="do-now-label">Do this now, before clicking Next</div>
-      <div class="do-now-body">Click the button below to open Gemini in a new tab. Switch your model to <strong>Gemini 2.0 Pro</strong>. Keep it open, you will use it for the rest of this training.</div>
+      <div class="do-now-body">Click the button below to open Gemini in a new tab. Switch your model to <strong>Gemini 3.1 Pro</strong>. Keep it open, you will use it for the rest of this training.</div>
     </div>
     <a href="https://gemini.google.com" target="_blank" rel="noopener" class="cta-btn" style="margin-top:12px">Open Gemini ↗</a>
   </div>
@@ -610,7 +618,7 @@
     <div class="mt16"></div>
     <div class="apollo-row">
       <img src="assets/images/apollo_with_ipad.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
-      <div class="speech-bubble">Without this, Gemini writes like a consultant billing by the word. Paste this into your Gemini chat, right after your prompt. Then hit send.</div>
+      <div class="speech-bubble">Without this, Gemini writes in flowery, jargon-y language, with LOTS of filler and very little substance. To mitigate that, paste this into your Gemini chat, right after your prompt. Then hit send!</div>
     </div>
     <h2 class="heading mt8">Add the tone</h2>
     <div class="mt16">
@@ -628,7 +636,7 @@
     <div class="mt16"></div>
     <div class="apollo-row">
       <img src="assets/images/apollo_with_ipad.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
-      <div class="speech-bubble">Gemini gives you an outline before it builds anything. That is on purpose. Read it, fix the order if needed, then tell Gemini to build.</div>
+      <div class="speech-bubble">Because of our prompt, Gemini gives an outline before it actually generates any slides. The worst feeling is waiting several minutes for an AI to generate something, it looking bad, and having to re-prompt. So... Read the outline BEFORE generating! Fix the order if needed, then when you are happy with it, tell Gemini to build.</div>
     </div>
     <h2 class="heading mt8" style="font-size:clamp(20px,5vw,28px)">Review the outline</h2>
     <div class="gemini-response mt12">
@@ -707,7 +715,7 @@ Slide 8: Thank you / Reflection</div>
     <div class="mt16"></div>
     <div class="apollo-row">
       <img src="assets/images/apollo_with_ipad.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
-      <div class="speech-bubble">Gemini builds the whole deck right there in your browser window. You can preview every slide before it ever touches Google Slides. When you like what you see, one button sends it over.</div>
+      <div class="speech-bubble">Gemini builds the whole deck right there in the browser chat window. You can preview every slide before actually exporting anything to Google Slides. When you like what you see, select ‘export’ to send it to Google Slides.</div>
     </div>
     <h2 class="heading mt8" style="font-size:clamp(20px,5vw,28px)">Preview it. Then export.</h2>
     <ol class="steps mt12">
@@ -744,26 +752,40 @@ Slide 8: Thank you / Reflection</div>
       <div class="speech-bubble">AI writing has patterns. Once you see them you cannot unsee them. These are the five things that give it away every time.</div>
     </div>
     <h2 class="heading mt8" style="font-size:clamp(22px,5vw,28px)">The five tells</h2>
-    <div class="mt12">
-      <div class="tell-item">
-        <div class="tell-title">1. Em dashes everywhere.</div>
-        <div class="tell-example">"This is important, in fact, it changes everything."</div>
+    <div class="tell-stepper mt12">
+      <div class="tell-step active" data-step="1">
+        <div class="tell-step-counter">Tell 1 of 5</div>
+        <div class="tell-title">Em dashes everywhere.</div>
+        <div class="tell-example">"This is important — in fact — it changes everything."</div>
+        <div class="tell-explain">AI defaults to em dashes to add drama. They just add clutter. Replace with a period or rewrite the sentence.</div>
       </div>
-      <div class="tell-item">
-        <div class="tell-title">2. Filler openers.</div>
+      <div class="tell-step" data-step="2">
+        <div class="tell-step-counter">Tell 2 of 5</div>
+        <div class="tell-title">Filler openers.</div>
         <div class="tell-example">"It is worth noting that our team has made significant progress."</div>
+        <div class="tell-explain">Delete everything before the actual point. "Our team made significant progress." Done.</div>
       </div>
-      <div class="tell-item">
-        <div class="tell-title">3. Everything in exactly three points. Always.</div>
+      <div class="tell-step" data-step="3">
+        <div class="tell-step-counter">Tell 3 of 5</div>
+        <div class="tell-title">Three-point lists. Always exactly three.</div>
         <div class="tell-example">"There are three key areas: alignment, communication, and growth."</div>
+        <div class="tell-explain">AI loves the rule of three. If you have two things, say two. If you have four, say four.</div>
       </div>
-      <div class="tell-item">
-        <div class="tell-title">4. No specific details.</div>
+      <div class="tell-step" data-step="4">
+        <div class="tell-step-counter">Tell 4 of 5</div>
+        <div class="tell-title">Vague language. No real details.</div>
         <div class="tell-example">"Our team has seen strong results across multiple initiatives this quarter."</div>
+        <div class="tell-explain">Which results? Which initiatives? Replace every vague claim with a real number or fact only you would know.</div>
       </div>
-      <div class="tell-item">
-        <div class="tell-title">5. No voice.</div>
-        <div class="tell-example">"The goal is simple, it is not about the output, it is about the process."</div>
+      <div class="tell-step" data-step="5">
+        <div class="tell-step-counter">Tell 5 of 5</div>
+        <div class="tell-title">No voice. Could be from any company.</div>
+        <div class="tell-example">"The goal is not the output. It is about cultivating a mindset of continuous improvement."</div>
+        <div class="tell-explain">If another company could publish this exact sentence, delete it. Add your actual perspective.</div>
+      </div>
+      <div class="tell-stepper-nav">
+        <span class="tell-stepper-progress" id="tell-progress-text">1 of 5</span>
+        <button class="tell-next-btn" id="tell-next-btn" onclick="nextTell()">Next tell &rarr;</button>
       </div>
     </div>
   </div>
@@ -773,13 +795,13 @@ Slide 8: Thank you / Reflection</div>
     <div class="mt16"></div>
     <div class="apollo-row">
       <img src="assets/images/apollo_with_ipad.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
-      <div class="speech-bubble" id="bubble13">This was written by Gemini. Tap every phrase that gives it away. All of them. You cannot move on until you find all 14.</div>
+      <div class="speech-bubble" id="bubble13">This was written by Gemini. Tap every phrase that gives it away. All of them. You cannot move on until you find all 16.</div>
     </div>
-    <p class="found-counter"><span id="found-count">0</span> of 14 found.</p>
+    <p class="found-counter"><span id="found-count">0</span> of 16 found.</p>
     <div class="para-card" id="tell-card">
-      <p style="font-weight:700;margin-bottom:10px">ðŸŒŸ Start, Stop, Continue: A Framework for Growth</p>
+      <p style="font-weight:700;margin-bottom:10px">🌟 Start, Stop, Continue: A Framework for Growth</p>
 
-      <p style="margin-bottom:12px"><span class="tappable" data-tell="1">It is worth noting</span> that the Start, Stop, Continue framework<span class="tappable" data-tell="2"> — when applied thoughtfully — </span>is one of the most powerful self-reflection tools available to professionals today. <span class="tappable" data-tell="3">In today's world,</span> personal development is not just encouraged — it is expected. <span class="tappable" data-tell="4">This serves as a reminder that</span> intentional growth does not happen by accident.</p>
+      <p style="margin-bottom:12px"><span class="tappable" data-tell="1">It is worth noting</span> that the Start, Stop, Continue framework<span class="tappable" data-tell="2"> — when applied thoughtfully — </span>is one of the most powerful self-reflection tools available to professionals today. <span class="tappable" data-tell="3">In today's world,</span> personal development is not just encouraged <span class="tappable" data-tell="15">— it is expected.</span> <span class="tappable" data-tell="4">This serves as a reminder that</span> intentional growth does not happen by accident.</p>
 
       <p style="margin-bottom:6px">Key areas of focus include:</p>
       <ul>
@@ -790,7 +812,7 @@ Slide 8: Thank you / Reflection</div>
 
       <p style="margin-bottom:12px"><span class="tappable" data-tell="8">As we continue to</span> evolve as an organization, <span class="tappable" data-tell="9">it is worth mentioning</span> that <span class="tappable" data-tell="10">this exercise is not simply about filling out a template — it is about cultivating a mindset of continuous improvement.</span> <span class="tappable" data-tell="11">At the end of the day,</span> <span class="tappable" data-tell="12">the goal is not to list actions, but to demonstrate a commitment to real change.</span> Our teams have seen <span class="tappable" data-tell="13">strong results across a number of key initiatives this quarter,</span> and this framework positions us to build on that momentum going forward.</p>
 
-      <p><span class="tappable" data-tell="14">In conclusion,</span> growth is not linear. The Start, Stop, Continue approach — when leveraged effectively — becomes a catalyst for both individual and team-level transformation. This is the kind of intentional work that moves organizations forward.</p>
+      <p><span class="tappable" data-tell="14">In conclusion,</span> growth is not linear. The Start, Stop, Continue approach <span class="tappable" data-tell="16">— when leveraged effectively —</span> becomes a catalyst for both individual and team-level transformation. This is the kind of intentional work that moves organizations forward.</p>
     </div>
     <button id="reveal-btn" onclick="revealAll()">Show me the rest</button>
   </div>
@@ -865,7 +887,7 @@ function goToSlide(n) {
   else stopRevealTimer();
 }
 
-const TELL_COUNT = 14;
+const TELL_COUNT = 16;
 
 function nextSlide() {
   if (current === 13 && foundTells.size < TELL_COUNT) return;
@@ -986,7 +1008,9 @@ const tellFeedback = {
   '11': "The king of filler. At the end of the day, don\'t use this.",
   '12': "\"The goal is not to...\" Another AI signature move.",
   '13': "Which results? Which initiatives? This says nothing.",
-  '14': "\"In conclusion\" is how AI says it\'s wrapping up. Just stop."
+  '14': "\"In conclusion\" is how AI says it\'s wrapping up. Just stop.",
+  '15': 'Another em dash! They show up everywhere in AI writing.',
+  '16': 'Two more em dashes in one sentence. AI absolutely cannot help itself.'
 };
 
 function showTellToast(msg) {
