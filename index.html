@@ -110,47 +110,56 @@
     #btn-next:disabled { background: rgba(0,118,255,0.35); border-color: transparent; opacity: 1; cursor: not-allowed; }
     #slide-counter { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.45); letter-spacing: 0.05em; }
 
-    /* â”€â”€ Apollo â”€â”€ */
+    /* -- Apollo -- */
     .apollo-row {
-      display: flex; align-items: flex-end; gap: 10px; margin-bottom: 20px;
+      display: flex; align-items: center; gap: 14px; margin-bottom: 20px;
     }
+    /* Default size — used on content-heavy slides */
     .apollo-img {
-      width: 60px; height: 60px; object-fit: contain; flex-shrink: 0;
+      width: 90px; height: 90px; object-fit: contain; flex-shrink: 0;
     }
-    .apollo-img.large { width: 96px; height: 96px; }
+    .apollo-img.large { width: 120px; height: 120px; }
+    /* Hero size — slide 1 only via apollo-row-hero */
+    .apollo-row-hero .apollo-img-hero {
+      width: 140px; height: 140px; object-fit: contain; flex-shrink: 0;
+    }
     .speech-bubble {
-      flex: 1; background: rgba(255,255,255,0.09);
-      border: 1px solid rgba(255,255,255,0.14);
-      border-radius: 14px 14px 14px 4px;
-      padding: 12px 14px; font-size: 14px; line-height: 1.55;
-      color: rgba(255,255,255,0.88);
+      flex: 1;
+      background: rgba(27,36,47,0.85);
+      border: 2.5px solid var(--blue);
+      border-radius: 18px;
+      padding: 14px 16px;
+      font-size: 14px; line-height: 1.6;
+      color: var(--white);
       position: relative;
     }
+    /* Tail pointing left toward Apollo */
     .speech-bubble::before {
       content: '';
       position: absolute;
-      bottom: -1px;
-      left: -9px;
+      top: 50%; transform: translateY(-50%);
+      left: -13px;
       width: 0; height: 0;
       border-style: solid;
-      border-width: 0 0 10px 10px;
-      border-color: transparent transparent rgba(255,255,255,0.14) transparent;
+      border-width: 10px 13px 10px 0;
+      border-color: transparent var(--blue) transparent transparent;
     }
     .speech-bubble::after {
       content: '';
       position: absolute;
-      bottom: 1px;
-      left: -7px;
+      top: 50%; transform: translateY(-50%);
+      left: -9px;
       width: 0; height: 0;
       border-style: solid;
-      border-width: 0 0 9px 9px;
-      border-color: transparent transparent rgba(255,255,255,0.09) transparent;
+      border-width: 8px 10px 8px 0;
+      border-color: transparent rgba(27,36,47,0.85) transparent transparent;
     }
     .apollo-center {
       display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 20px;
     }
     .apollo-center .apollo-img { margin-bottom: 14px; }
-    .apollo-center .speech-bubble { border-radius: 14px; max-width: 300px; text-align: left; }
+    .apollo-center .speech-bubble { border-radius: 18px; max-width: 300px; text-align: left; }
+    .apollo-center .speech-bubble::before, .apollo-center .speech-bubble::after { display: none; }
 
     /* â”€â”€ Type â”€â”€ */
     .heading {
@@ -394,13 +403,11 @@
     }
     #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-    .apollo-row-hero { align-items: center; margin-bottom: 20px; flex: 1; }
+    .apollo-row-hero { margin-bottom: 20px; }
     .apollo-img-hero {
       width: 140px; height: 140px; object-fit: contain; flex-shrink: 0;
     }
-    .speech-bubble-hero {
-      font-size: 15px; line-height: 1.65;
-    }
+    .speech-bubble-hero { font-size: 15px; line-height: 1.65; }
 
     audio { display: none; }
 
