@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Prompt it. Slop-check it. â€” Sandbox VR</title>
+  <title>Prompt it. Slop-check it. — Sandbox VR</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
@@ -480,7 +480,7 @@
     <div class="mt16"></div>
     <div class="apollo-row">
       <img src="assets/images/apollo_with_ipad.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
-      <div class="speech-bubble">Open Gemini now. Follow along. This works a lot better if you're actually doing it.</div>
+      <div class="speech-bubble">Open Gemini now. Before you do anything, make sure <strong>Gemini 2.0 Flash</strong> is selected in the model picker — it gives the best results for building decks. Follow along.</div>
     </div>
     <h2 class="heading mt8">Open Gemini</h2>
     <div class="screenshot-card mt12">
@@ -516,92 +516,9 @@
     <div class="mt16"></div>
     <div class="apollo-row">
       <img src="assets/images/apollo_with_ipad.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
-      <div class="speech-bubble">Your turn. Switch to your Gemini tab. Fill in your actual Start, Stop, Continue goals and paste this prompt in. But do not hit send yet â€” we are adding one more thing first.</div>
+      <div class="speech-bubble">Do this before you type a single word. Attaching the brand file tells Gemini exactly how your slides should look — colors, fonts, layout, everything.</div>
     </div>
-    <h2 class="heading mt8" style="font-size:clamp(22px,5vw,30px)">The prompt</h2>
-    <div class="mt12">
-      <div class="prompt-block" id="p5">I need a 10-slide deck for the People Team about my personal Start, Stop, and Continue goals. Key points: [list your Start, Stop, Continue items]. Write an outline first. Tone: direct, conversational, no jargon, short sentences. Make sure there is a title slide. The second and third slides should display in big text: our company mission: 'To bring people closer together through world class immersive experiences.' And our team mission and vision: People Team Mission: 'Building the Organization and its Culture Through our People.' People Team Vision: 'Fun and Frictionless.'</div>
-      <button class="copy-btn" id="copy5" onclick="copyText('p5','copy5')">Copy to Gemini</button>
-      <div class="gemini-mock" onclick="window.open('https://gemini.google.com','_blank')">
-        <div class="gemini-mock-text">I need a 10-slide deck for the People Team about my personal Start, Stop, and Continue goals. Key points: [list your Start, Stop, Continue items]. Write an outline first. Tone: direct, conversational, no jargon, short sentences...</div>
-        <div class="gemini-mock-bar">
-          <div class="g-plus">+</div>
-          <div class="g-right">
-            <div class="g-pro">Pro</div>
-            <div class="g-send">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 2L11 13" stroke="white" stroke-width="2.2" stroke-linecap="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="do-now">
-        <div class="do-now-label">Your task right now</div>
-        <div class="do-now-body">Paste this prompt into Gemini. Replace [list your Start, Stop, Continue items] with your actual goals. Then stop.</div>
-        <div class="do-now-warn">Do not hit send yet. Next slide adds the tone instruction â€” Gemini needs both before you send.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- â•â•â• SLIDE 6 â•â•â• -->
-  <div class="slide" id="slide-6">
-    <div class="mt16"></div>
-    <div class="apollo-row">
-      <img src="assets/images/apollo_with_ipad.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
-      <div class="speech-bubble">The prompt asks Gemini for an outline first. That is on purpose. Read it, fix the order if needed, then move on. Still do not send to generate slides yet.</div>
-    </div>
-    <h2 class="heading mt8" style="font-size:clamp(20px,5vw,28px)">Ask for the outline first</h2>
-    <div class="gemini-response mt12">
-      <div class="gemini-response-text">Sure! Here's an outline for your Start, Stop, Continue deck:
-
-Slide 1: Title â€” [Your Name], People Team
-Slide 2: Company Mission
-Slide 3: Team Mission and Vision
-Slide 4: Start â€” [Your Start goals]
-Slide 5: Start continued
-Slide 6: Stop â€” [Your Stop goals]
-Slide 7: Stop continued
-Slide 8: Continue â€” [Your Continue goals]
-Slide 9: Continue continued
-Slide 10: Thank you / Reflection</div>
-    </div>
-    <div class="chips">
-      <span class="chip">Cut the 'continued' slides â€” combine them</span>
-      <span class="chip">Add your name to slide 1</span>
-      <span class="chip">Reorder if needed</span>
-    </div>
-    <div class="do-now">
-      <div class="do-now-label">Your task right now</div>
-      <div class="do-now-body">Check the outline Gemini gave you. Does the order make sense? Any slides you want to cut or rename? Make a note. You will approve it on the next step.</div>
-      <div class="do-now-warn">Still do not ask Gemini to build the slides yet. One more thing to add first.</div>
-    </div>
-  </div>
-
-  <!-- â•â•â• SLIDE 7 â•â•â• -->
-  <div class="slide" id="slide-7">
-    <div class="mt16"></div>
-    <div class="apollo-row">
-      <img src="assets/images/apollo_with_ipad.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
-      <div class="speech-bubble">Without this, Gemini writes like a consultant billing by the word. Paste this into your Gemini chat right now â€” before you tell it to build. Then hit send on your outline approval.</div>
-    </div>
-    <h2 class="heading mt8">Give it a tone</h2>
-    <div class="mt16">
-      <div class="prompt-block" id="p7">Write in a direct, conversational tone. No jargon. Short sentences. Do not use: em dashes, 'it is worth noting,' 'in conclusion,' 'leverage,' 'the goal is simple,' 'it is not X it is Y,' 'at the end of the day,' 'it is worth mentioning,' 'in today's world,' 'this is a reminder that,' or 'as we continue to.' If you catch yourself writing any of these, delete the sentence and start over.</div>
-      <button class="copy-btn" id="copy7" onclick="copyText('p7','copy7')">Copy</button>
-      <div class="do-now">
-        <div class="do-now-label">Your task right now</div>
-        <div class="do-now-body">Copy the tone block above. Paste it into your Gemini chat. Then tell Gemini: "The outline looks good. Please build the slides now." Now you can send.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- â•â•â• SLIDE 8 â•â•â• -->
-  <div class="slide" id="slide-8">
-    <div class="mt16"></div>
-    <div class="apollo-row">
-      <img src="assets/images/apollo_with_ipad.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
-      <div class="speech-bubble">Gemini can pull files straight from your Google Drive. Here's how.</div>
-    </div>
-    <h2 class="heading mt8" style="font-size:clamp(20px,5vw,28px)">Attach from Google Drive</h2>
+    <h2 class="heading mt8" style="font-size:clamp(20px,5vw,28px)">Attach your brand file first</h2>
     <div class="screenshot-card mt12">
       <img src="assets/images/gemini-screenshot-2.png" alt="Gemini with Drive file attached"
            onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'>Screenshot coming soon</div>'">
@@ -610,14 +527,82 @@ Slide 10: Thank you / Reflection</div>
       <li><span class="step-num">1</span>Click the "+" icon in the Gemini prompt bar</li>
       <li><span class="step-num">2</span>Select "Add from Drive"</li>
       <li><span class="step-num">3</span>Search for "SBVR Slides Made Easy"</li>
-      <li><span class="step-num">4</span>Select it and attach before you send</li>
+      <li><span class="step-num">4</span>Select it — it will appear attached in the prompt bar</li>
     </ol>
-    <div class="callout">This deck was built by Chandler on the People Team. It is the official Sandbox template. Attaching it tells Gemini exactly how your slides should look.</div>
+    <div class="callout">This deck was built by Chandler on the People Team. It is the official Sandbox template. Gemini will match its style when you send your prompt.</div>
     <div class="do-now">
       <div class="do-now-label">Your task right now</div>
-      <div class="do-now-body">Go back to your Gemini chat. Click "+" and attach the SBVR Slides Made Easy file from Drive before you send anything else. If you already sent â€” start a new message and attach it now.</div>
+      <div class="do-now-body">Attach "SBVR Slides Made Easy" from Drive now. Do not send anything yet — the next slide has your prompt.</div>
     </div>
-  </div>
+</div>
+
+  <!-- â•â•â• SLIDE 6 â•â•â• -->
+  <div class="slide" id="slide-6">
+    <div class="mt16"></div>
+    <div class="apollo-row">
+      <img src="assets/images/apollo_with_ipad.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
+      <div class="speech-bubble">Your turn. Switch to your Gemini tab. Fill in your actual Start, Stop, Continue goals and paste this prompt in. But do not hit send yet — we are adding one more thing first.</div>
+    </div>
+    <h2 class="heading mt8" style="font-size:clamp(22px,5vw,30px)">The prompt</h2>
+    <div class="mt12">
+      <div class="prompt-block" id="p5">I need a 10-slide deck for the People Team about my personal Start, Stop, and Continue goals. Key points: [list your Start, Stop, Continue items]. Write an outline first. Tone: direct, conversational, no jargon, short sentences. Make sure there is a title slide. The second and third slides should display in big text: our company mission: 'To bring people closer together through world class immersive experiences.' And our team mission and vision: People Team Mission: 'Building the Organization and its Culture Through our People.' People Team Vision: 'Fun and Frictionless.'</div>
+      <button class="copy-btn" id="copy5" onclick="copyText('p5','copy5')">Copy to Gemini</button>
+      <div class="do-now">
+        <div class="do-now-label">Your task right now</div>
+        <div class="do-now-body">Paste this prompt into Gemini. Replace [list your Start, Stop, Continue items] with your actual goals. Then stop.</div>
+        <div class="do-now-warn">Do not hit send yet. Next slide adds a tone instruction — Gemini needs both before you send.</div>
+      </div>
+    </div>
+</div>
+
+  <!-- â•â•â• SLIDE 7 â•â•â• -->
+  <div class="slide" id="slide-7">
+    <div class="mt16"></div>
+    <div class="apollo-row">
+      <img src="assets/images/apollo_with_ipad.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
+      <div class="speech-bubble">Without this, Gemini writes like a consultant billing by the word. Paste this into your Gemini chat — right after your prompt. Then hit send.</div>
+    </div>
+    <h2 class="heading mt8">Add the tone</h2>
+    <div class="mt16">
+      <div class="prompt-block" id="p7">Write in a direct, conversational tone. No jargon. Short sentences. Do not use: em dashes, 'it is worth noting,' 'in conclusion,' 'leverage,' 'the goal is simple,' 'it is not X it is Y,' 'at the end of the day,' 'it is worth mentioning,' 'in today's world,' 'this is a reminder that,' or 'as we continue to.' If you catch yourself writing any of these, delete the sentence and start over.</div>
+      <button class="copy-btn" id="copy7" onclick="copyText('p7','copy7')">Copy</button>
+      <div class="do-now">
+        <div class="do-now-label">Your task right now</div>
+        <div class="do-now-body">Paste the tone block above into your Gemini chat, right after your prompt. Now hit send. Gemini will give you an outline first.</div>
+      </div>
+    </div>
+</div>
+
+  <!-- â•â•â• SLIDE 8 â•â•â• -->
+  <div class="slide" id="slide-8">
+    <div class="mt16"></div>
+    <div class="apollo-row">
+      <img src="assets/images/apollo_with_ipad.png" alt="" class="apollo-img" onerror="this.style.opacity=0">
+      <div class="speech-bubble">Gemini gives you an outline before it builds anything. That is on purpose. Read it, fix the order if needed, then tell Gemini to build.</div>
+    </div>
+    <h2 class="heading mt8" style="font-size:clamp(20px,5vw,28px)">Review the outline</h2>
+    <div class="gemini-response mt12">
+      <div class="gemini-response-text">Sure! Here's an outline for your Start, Stop, Continue deck:
+
+Slide 1: Title — [Your Name], People Team
+Slide 2: Company Mission
+Slide 3: Team Mission and Vision
+Slide 4: Start — [Your Start goals]
+Slide 5: Stop — [Your Stop goals]
+Slide 6: Continue — [Your Continue goals]
+Slide 7: Key Takeaways
+Slide 8: Thank you / Reflection</div>
+    </div>
+    <div class="chips">
+      <span class="chip">Cut or combine slides</span>
+      <span class="chip">Add your name to slide 1</span>
+      <span class="chip">Reorder if needed</span>
+    </div>
+    <div class="do-now">
+      <div class="do-now-label">Your task right now</div>
+      <div class="do-now-body">Check the outline. Happy with the structure? Reply to Gemini: "Outline looks good. Please build the slides now." Then wait for the full deck.</div>
+    </div>
+</div>
 
   <!-- â•â•â• SLIDE 9 â•â•â• -->
   <div class="slide" id="slide-9">
@@ -677,7 +662,7 @@ Slide 10: Thank you / Reflection</div>
     <h2 class="heading mt8" style="font-size:clamp(20px,5vw,28px)">Preview it. Then export.</h2>
     <ol class="steps mt12">
       <li><span class="step-num">1</span>After Gemini generates your deck, a slide preview panel opens in the Gemini browser window</li>
-      <li><span class="step-num">2</span>Use the arrow buttons to flip through every slide â€” check the content and order</li>
+      <li><span class="step-num">2</span>Use the arrow buttons to flip through every slide — check the content and order</li>
       <li><span class="step-num">3</span>When it looks right, click "Export to Slides" in the top right of the preview panel</li>
       <li><span class="step-num">4</span>Google Slides opens with your deck already built</li>
       <li><span class="step-num">5</span>Apply the SBVR Slides Made Easy theme from the Themes panel to finish</li>
@@ -712,7 +697,7 @@ Slide 10: Thank you / Reflection</div>
     <div class="mt12">
       <div class="tell-item">
         <div class="tell-title">1. Em dashes everywhere.</div>
-        <div class="tell-example">"This is important â€” in fact â€” it changes everything."</div>
+        <div class="tell-example">"This is important — in fact — it changes everything."</div>
       </div>
       <div class="tell-item">
         <div class="tell-title">2. Filler openers.</div>
@@ -728,7 +713,7 @@ Slide 10: Thank you / Reflection</div>
       </div>
       <div class="tell-item">
         <div class="tell-title">5. No voice.</div>
-        <div class="tell-example">"The goal is simple â€” it is not about the output, it is about the process."</div>
+        <div class="tell-example">"The goal is simple — it is not about the output, it is about the process."</div>
       </div>
     </div>
   </div>
@@ -744,7 +729,7 @@ Slide 10: Thank you / Reflection</div>
     <div class="para-card" id="tell-card">
       <p style="font-weight:700;margin-bottom:10px">ðŸŒŸ Start, Stop, Continue: A Framework for Growth</p>
 
-      <p style="margin-bottom:12px"><span class="tappable" data-tell="1">It is worth noting</span> that the Start, Stop, Continue framework<span class="tappable" data-tell="2"> â€” when applied thoughtfully â€” </span>is one of the most powerful self-reflection tools available to professionals today. <span class="tappable" data-tell="3">In today's world,</span> personal development is not just encouraged â€” it is expected. <span class="tappable" data-tell="4">This serves as a reminder that</span> intentional growth does not happen by accident.</p>
+      <p style="margin-bottom:12px"><span class="tappable" data-tell="1">It is worth noting</span> that the Start, Stop, Continue framework<span class="tappable" data-tell="2"> — when applied thoughtfully — </span>is one of the most powerful self-reflection tools available to professionals today. <span class="tappable" data-tell="3">In today's world,</span> personal development is not just encouraged — it is expected. <span class="tappable" data-tell="4">This serves as a reminder that</span> intentional growth does not happen by accident.</p>
 
       <p style="margin-bottom:6px">Key areas of focus include:</p>
       <ul>
@@ -753,9 +738,9 @@ Slide 10: Thank you / Reflection</div>
         <li><span class="tappable" data-tell="7"><strong>Alignment:</strong> Ensuring personal goals stay connected to the broader organizational vision</span></li>
       </ul>
 
-      <p style="margin-bottom:12px"><span class="tappable" data-tell="8">As we continue to</span> evolve as an organization, <span class="tappable" data-tell="9">it is worth mentioning</span> that <span class="tappable" data-tell="10">this exercise is not simply about filling out a template â€” it is about cultivating a mindset of continuous improvement.</span> <span class="tappable" data-tell="11">At the end of the day,</span> <span class="tappable" data-tell="12">the goal is not to list actions, but to demonstrate a commitment to real change.</span> Our teams have seen <span class="tappable" data-tell="13">strong results across a number of key initiatives this quarter,</span> and this framework positions us to build on that momentum going forward.</p>
+      <p style="margin-bottom:12px"><span class="tappable" data-tell="8">As we continue to</span> evolve as an organization, <span class="tappable" data-tell="9">it is worth mentioning</span> that <span class="tappable" data-tell="10">this exercise is not simply about filling out a template — it is about cultivating a mindset of continuous improvement.</span> <span class="tappable" data-tell="11">At the end of the day,</span> <span class="tappable" data-tell="12">the goal is not to list actions, but to demonstrate a commitment to real change.</span> Our teams have seen <span class="tappable" data-tell="13">strong results across a number of key initiatives this quarter,</span> and this framework positions us to build on that momentum going forward.</p>
 
-      <p><span class="tappable" data-tell="14">In conclusion,</span> growth is not linear. The Start, Stop, Continue approach â€” when leveraged effectively â€” becomes a catalyst for both individual and team-level transformation. This is the kind of intentional work that moves organizations forward.</p>
+      <p><span class="tappable" data-tell="14">In conclusion,</span> growth is not linear. The Start, Stop, Continue approach — when leveraged effectively — becomes a catalyst for both individual and team-level transformation. This is the kind of intentional work that moves organizations forward.</p>
     </div>
     <button id="reveal-btn" onclick="revealAll()">Show me the rest</button>
   </div>
@@ -779,7 +764,7 @@ Slide 10: Thank you / Reflection</div>
       <div class="edit-card">
         <div class="edit-card-title">2. Replace em dashes with a period or nothing</div>
         <div class="edit-label b">Before</div>
-        <div class="edit-before">"Growth â€” when done right â€” takes time."</div>
+        <div class="edit-before">"Growth — when done right — takes time."</div>
         <div class="edit-label a" style="margin-top:7px">After</div>
         <div class="edit-after">"Growth takes time when done right."</div>
       </div>
