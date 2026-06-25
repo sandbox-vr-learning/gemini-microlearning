@@ -929,9 +929,12 @@ function updateUI() {
   }
 }
 
+let currentAudio = null;
 function playAudio(n) {
+  if (currentAudio) { currentAudio.pause(); currentAudio.currentTime = 0; currentAudio = null; }
   const src = 'assets/audio/slide-' + String(n).padStart(2, '0') + '.mp3';
   const a = new Audio(src);
+  currentAudio = a;
   a.play().catch(() => {});
 }
 
