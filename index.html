@@ -470,6 +470,23 @@
     #slide-9 .carousel { flex: 1; min-width: 0; }
     #slide-9 .c-slide img { max-height: 520px; }
 
+
+    /* Slide 1 audio play button */
+    .audio-play-btn {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      width: 100%; padding: 12px; border-radius: 100px;
+      background: rgba(255,255,255,0.08); border: 1.5px solid rgba(255,255,255,0.25);
+      color: var(--white); font-family: var(--font); font-size: 15px; font-weight: 600;
+      cursor: pointer; margin-bottom: 10px; transition: all 0.2s;
+    }
+    .audio-play-btn:hover { background: rgba(255,255,255,0.14); }
+    .audio-play-btn.playing { border-color: var(--blue); color: var(--blue); }
+    .audio-play-btn.playing svg circle { stroke: var(--blue); }
+    .audio-play-btn.playing svg path { fill: var(--blue); }
+    .audio-play-btn.done { border-color: #27a75c; color: #27a75c; }
+    .audio-play-btn.done svg circle { stroke: #27a75c; }
+    .audio-play-btn.done svg path { fill: #27a75c; }
+
     audio { display: none; }
 
     .spacer { flex: 1; }
@@ -504,7 +521,11 @@
       <span class="tag-pill">Gemini for Slides</span>
       <span class="tag-pill">Slop Detector</span>
     </div>
-    <button class="cta-btn" onclick="goToSlide(2)">Let's go</button>
+    <button class="audio-play-btn" id="intro-play-btn" onclick="playIntro()">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="11" stroke="white" stroke-width="1.5"/><path d="M10 8.5L16 12L10 15.5V8.5Z" fill="white"/></svg>
+      <span id="intro-play-label">Play intro</span>
+    </button>
+    <button class="cta-btn" id="lets-go-btn" onclick="goToSlide(2)" disabled style="opacity:0.35;cursor:not-allowed">Let's go</button>
   </div>
 
   <!-- â•â•â• SLIDE 2 â•â•â• -->
@@ -609,7 +630,7 @@
     </div>
     <h2 class="heading mt8" style="font-size:clamp(22px,5vw,30px)">The prompt</h2>
     <div class="mt12">
-      <div class="prompt-block" id="p5">I need a 10-slide deck for the People Team about my personal Start, Stop, and Continue goals. Key points: [list your Start, Stop, Continue items]. Write an outline first. Tone: direct, conversational, no jargon, short sentences. Make sure there is a title slide. The second and third slides should display in big text: our company mission: 'To bring people closer together through world class immersive experiences.' And our team mission and vision: People Team Mission: 'Building the Organization and its Culture Through our People.' People Team Vision: 'Fun and Frictionless.'</div>
+      <div class="prompt-block" id="p5">I need a 10-slide deck for the People Team about my personal Start, Stop, and Continue goals. Key points: [list your Start, Stop, Continue items]. IMPORTANT: Before you generate any slides or previews, you must first output a numbered outline of all 10 slides and wait for my approval. Do not start building slides until I say the outline looks good. Tone: direct, conversational, no jargon, short sentences. Make sure there is a title slide. The second and third slides should display in big text: our company mission: 'To bring people closer together through world class immersive experiences.' And our team mission and vision: People Team Mission: 'Building the Organization and its Culture Through our People.' People Team Vision: 'Fun and Frictionless.'</div>
       <button class="copy-btn" id="copy5" onclick="copyText('p5','copy5')">Copy to Gemini</button>
       <div class="do-now">
         <div class="do-now-label">Your task right now</div>
@@ -833,7 +854,7 @@ Slide 8: Thank you / Reflection</div>
     <h2 class="heading mt8" style="font-size:clamp(22px,5vw,28px)">Your prompt kit</h2>
     <div class="mt12">
       <div class="block-label">Build a deck</div>
-      <div class="prompt-block" id="p15a">I need a 10-slide deck for the People Team about my personal Start, Stop, and Continue goals. Key points: [list your Start, Stop, Continue items]. Write an outline first. Tone: direct, conversational, no jargon, short sentences. Make sure there is a title slide. The second and third slides should display in big text: our company mission: 'To bring people closer together through world class immersive experiences.' And our team mission and vision: People Team Mission: 'Building the Organization and its Culture Through our People.' People Team Vision: 'Fun and Frictionless.'</div>
+      <div class="prompt-block" id="p15a">I need a 10-slide deck for the People Team about my personal Start, Stop, and Continue goals. Key points: [list your Start, Stop, Continue items]. IMPORTANT: Before you generate any slides or previews, you must first output a numbered outline of all 10 slides and wait for my approval. Do not start building slides until I say the outline looks good. Tone: direct, conversational, no jargon, short sentences. Make sure there is a title slide. The second and third slides should display in big text: our company mission: 'To bring people closer together through world class immersive experiences.' And our team mission and vision: People Team Mission: 'Building the Organization and its Culture Through our People.' People Team Vision: 'Fun and Frictionless.'</div>
       <button class="copy-btn" id="copy15a" onclick="copyText('p15a','copy15a')">Copy to Gemini</button>
       <div class="divider"></div>
       <div class="block-label">Check for AI slop</div>
@@ -1109,14 +1130,31 @@ function nextTell() {
 updateTell = () => {}; // placeholder
 updateUI();
 
-// Play slide 1 audio on first interaction (browsers block autoplay until user gesture)
-function onFirstInteraction() {
-  if (current === 1) playAudio(1);
-  document.removeEventListener('click', onFirstInteraction);
-  document.removeEventListener('keydown', onFirstInteraction);
+// Slide 1 intro audio with play button
+function playIntro() {
+  const btn = document.getElementById('intro-play-btn');
+  const label = document.getElementById('intro-play-label');
+  const letsGo = document.getElementById('lets-go-btn');
+  if (btn.classList.contains('playing')) return;
+
+  btn.classList.add('playing');
+  label.textContent = 'Playing...';
+
+  if (currentAudio) { currentAudio.pause(); currentAudio.currentTime = 0; }
+  const src = 'assets/audio/slide-01.mp3';
+  const a = new Audio(src);
+  currentAudio = a;
+  a.play().catch(() => {});
+
+  a.addEventListener('ended', () => {
+    btn.classList.remove('playing');
+    btn.classList.add('done');
+    label.textContent = 'Played ✓';
+    letsGo.disabled = false;
+    letsGo.style.opacity = '1';
+    letsGo.style.cursor = 'pointer';
+  });
 }
-document.addEventListener('click', onFirstInteraction);
-document.addEventListener('keydown', onFirstInteraction);
 </script>
 </body>
 </html>
